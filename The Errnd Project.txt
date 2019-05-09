@@ -1,1 +1,22 @@
 This is Kenneth’s sample text
+
+
+Hello Co Dev;
+this is the file we can use to communicate and set the structure of the project
+
+Firstly i have made some folders under the app folder
+
+APP
+    Models // this folder is where all our models go..there is already a User Model here
+    
+Http
+    Controllers //this is where our controller will be made...their would be sub-folders for specfic controllers
+                //e.g. Auth, Wallet etc
+    Middleware // handle our user sessions and authorization
+    Resources  // where we put our different resoure as per what we return
+    Validators // where we handle different validation of different post request
+    
+Database
+    Migration // where we write and put our schema
+        
+    
