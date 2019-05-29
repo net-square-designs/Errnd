@@ -18,7 +18,7 @@ Errnd is a platform where your errands are completed by your communities
 [Link](https://errnd.herokuapp.com/api/v1)
 
 ## Documentation
-Coming soon ...
+[Link](https://errnd.docs.apiary.io/#)
 
 ## API Routes
 * Register a user
