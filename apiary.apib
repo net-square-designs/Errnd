@@ -61,6 +61,48 @@ Errnd is a platform where your errands are completed by your communities
                     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImN1c3RvbWVyNDAwMEBjdXN0b21lci5jb20iLCJ1c2VySWQiOjUsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTU1OTE0ODI3NSwiZXhwIjoxNTU5MjM0Njc1fQ.E0sQef1pYjYI0B0v6IDokrwiW-2XF1ADJE4ddy2bqJ0"
                 }
             }
+            
+              
+        
++ Response 409 (application/json)
+
+    + Headers
+
+            Location: /auth/signup
+
+    + Body        
+    
+            {
+                "status": 409,
+                "data": {
+                    "error": "User already exists, please sign up a new user"
+                }
+            }
+            
++ Response 400 (application/json)
+
+    + Headers
+
+            Location: /auth/signup
+
+    + Body        
+    
+            {
+                "status": 400,
+                "data": {
+                    "error": {
+                        "email": "Invalid email"
+                    }
+                }
+            }
+
+            {
+                "status": 400,
+                "data": {
+                    "error": "role must be runner or customer"
+                }
+            }         
+      
 
 ## Signin [/auth/login]
 
@@ -88,5 +130,62 @@ Errnd is a platform where your errands are completed by your communities
                 "data": {
                     "message": "Welcome newuser",
                     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImN1c3RvbWVyNDAwMEBjdXN0b21lci5jb20iLCJ1c2VySWQiOjUsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTU1OTE0ODM4MywiZXhwIjoxNTU5MjM0NzgzfQ.Y6Uao5otns3NJSWwGo-XgOwW8PTckVlu1QPgJ11UN04"
+                }
+            }
+            
++ Response 401 (application/json)
+
+    + Headers
+
+            Location: /auth/login
+
+    + Body        
+    
+            {
+                status: 401,
+                data: {
+                    message: 'Invalid email/username or password',
+                }
+            }
+
++ Response 404 (application/json)
+
+    + Headers
+
+            Location: /auth/login
+
+    + Body        
+    
+            {
+                status: 404,
+                data: {
+                error: 'User not found, please register user onto the platform',
+                }
+            }
+            
++ Response 400 (application/json)
+
+    + Headers
+
+            Location: /auth/signup
+
+    + Body        
+    
+            {
+                "status": 400,
+                "data": {
+                    "error": {
+                        emailOrUsername: 'email or username must be filled',
+                        password: 'password must be filled',
+                    }
+                }
+            }
+
+            {
+                "status": 400,
+                "data": {
+                    "error": {
+                        email: 'Invalid email'
+                    }
                 }
             }
