@@ -1,0 +1,92 @@
+FORMAT: 1A
+HOST: https://fast-food-fast.herokuapp.com/api/v1
+
+# Errnd
+
+Errnd is a platform where your errands are completed by your communities
+
+#### Features 
+
+  * Users can create an account and log in  
+
+
+## Welcome Page [/]
+
+### Welcome a user [GET]
+
+  * Helps to welcome a user to the API
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /
+
+    + Body        
+    
+    
+            {
+                "status": 200,
+                "data": {
+                    "message": "Welcome to Errnd API, A platform where your errands are completed by your communities"
+                }
+            }
+
+## Sign up [/auth/signup]
+
+### Sign up  a user [POST]
+
+  * Helps a user to sign up on the API
+  
++ Request (application/json)
+
+        {
+            "role": "runner",
+            "email": "newuser@email.com",
+            "password": "password",
+            "username": "newuser"
+        }
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /auth/signup
+
+    + Body        
+    
+            {
+                "status": 201,
+                "data": "data": {
+                    "message": "User created successfully",
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImN1c3RvbWVyNDAwMEBjdXN0b21lci5jb20iLCJ1c2VySWQiOjUsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTU1OTE0ODI3NSwiZXhwIjoxNTU5MjM0Njc1fQ.E0sQef1pYjYI0B0v6IDokrwiW-2XF1ADJE4ddy2bqJ0"
+                }
+            }
+
+## Signin [/auth/login]
+
+### Login a user [POST]
+
+  * Helps a user to use all features of the API
+  
++ Request (application/json)
+
+        {
+                "email": "newuser@email.com",
+                "password": "password"
+        }
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /auth/login
+
+    + Body        
+    
+    
+            {
+                "status": 200,
+                "data": {
+                    "message": "Welcome newuser",
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImN1c3RvbWVyNDAwMEBjdXN0b21lci5jb20iLCJ1c2VySWQiOjUsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTU1OTE0ODM4MywiZXhwIjoxNTU5MjM0NzgzfQ.Y6Uao5otns3NJSWwGo-XgOwW8PTckVlu1QPgJ11UN04"
+                }
+            }
