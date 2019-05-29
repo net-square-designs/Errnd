@@ -5,9 +5,6 @@
 Errnd is a platform where your errands are completed by your communities
 
 ## Technologies
-  * HTML
-  * CSS
-  * Javascript
   * Node.js
   * Express
   * Mocha/Chai
