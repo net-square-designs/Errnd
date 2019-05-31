@@ -1,16 +1,23 @@
-import Sequelize from 'sequelize';
 import { StatusResponse } from '../helpers';
 import model from '../models';
 
 const { users } = model;
-const { Op } = Sequelize;
 
 // This function checks to see whether a user exist or not
 const validateUserDoNotExists = async (req, res, next) => {
   const { email, username } = req.body;
+  let key;
+  let value;
+  if (email) {
+    key = 'email';
+    value = email;
+  } else {
+    key = 'username';
+    value = username;
+  }
   const user = await users.findAndCountAll({
     where: {
-      [Op.or]: [{ email }, { username }]
+      [key]: value
     },
   });
 
