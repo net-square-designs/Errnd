@@ -1,6 +1,9 @@
 import chai from 'chai';
+import dotenv from 'dotenv';
 import chaiHttp from 'chai-http';
 import app from '../index';
+
+dotenv.config();
 
 chai.use(chaiHttp);
 chai.should();

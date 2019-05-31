@@ -1,4 +1,5 @@
 [![CircleCI](https://circleci.com/gh/net-square-designs/Errnd/tree/develop.svg?style=svg)](https://circleci.com/gh/net-square-designs/Errnd/tree/develop)
+[![Coverage Status](https://coveralls.io/repos/github/net-square-designs/Errnd/badge.svg?branch=ft-implement-user-profile)](https://coveralls.io/github/net-square-designs/Errnd?branch=ft-implement-user-profile)
 
 # Errnd
 ## Description

@@ -32,7 +32,7 @@ class Auth {
         username
       });
 
-      const token = generateToken(email, newUser.dataValues.id, role);
+      const token = generateToken(email, newUser.dataValues.id, role, username);
       const payload = {
         status: 201,
         data: {
@@ -59,7 +59,12 @@ class Auth {
    */
   static async login(req, res) {
     const { email, password, username } = req.body;
-    const foundUser = await findUser(email, username);
+    let foundUser;
+    if (email) {
+      foundUser = await findUser('email', email);
+    } else {
+      foundUser = await findUser('username', username);
+    }
 
     try {
       if (foundUser && !bcrypt.compareSync(password, foundUser.password)) {
@@ -74,7 +79,7 @@ class Auth {
           status: 200,
           data: {
             message: `Welcome ${foundUser.username}`,
-            token: generateToken(email, foundUser.id, foundUser.role),
+            token: generateToken(email, foundUser.id, foundUser.role, foundUser.username),
           }
         });
       }

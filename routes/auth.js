@@ -1,5 +1,5 @@
 import express from 'express';
-import Auth from '../controllers';
+import { Auth } from '../controllers';
 import {
   validateUserOnLogin,
   validateUserOnSignUp,
