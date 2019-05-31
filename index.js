@@ -7,7 +7,10 @@ import validator from 'express-validator';
 import cors from 'cors';
 import { StatusResponse } from './helpers';
 // Routes
-import auth from './routes';
+import {
+  auth,
+  profile
+} from './routes';
 
 const PORT = process.env.PORT || 3005;
 
@@ -20,6 +23,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(validator());
 
 app.use('/api/v1/auth', auth);
+app.use('/api/v1/profile', profile);
 
 // Default to here on home route
 app.get('/', (req, res) => StatusResponse.success(res, {

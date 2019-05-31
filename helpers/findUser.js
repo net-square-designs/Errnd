@@ -1,13 +1,11 @@
-import Sequelize from 'sequelize';
 import model from '../models';
 
 const { users } = model;
-const { Op } = Sequelize;
 
-const findUser = async (email, username) => {
+const findUser = async (key, value) => {
   const returnedUser = await users.findAndCountAll({
     where: {
-      [Op.or]: [{ email }, { username }],
+      [key]: value,
     },
   });
   if (returnedUser.count < 1) {

@@ -9,12 +9,13 @@ dotenv.config();
  * @param {string} role - user's role ['runner', 'customer']
  * @returns {string} - generated token
  */
-const generateToken = (email, userId, role) => {
+const generateToken = (email, userId, role, username) => {
   const token = jwt.sign(
     {
       email,
       userId,
-      role
+      role,
+      username
     },
     process.env.SECRET_KEY,
     {
