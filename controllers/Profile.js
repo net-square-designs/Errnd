@@ -109,22 +109,40 @@ class Profile {
 
       try {
         const decoded = jwt.verify(token, process.env.SECRET_KEY);
-        const createdUsersProfile = await profiles.create({
-          firstName: firstName || (returnedProfile ? returnedProfile.rows[0].firstName : ''),
-          lastName: lastName || (returnedProfile ? returnedProfile.rows[0].lastName : ''),
-          bio: bio || (returnedProfile ? returnedProfile.rows[0].bio : ''),
-          image: image || (returnedProfile ? returnedProfile.rows[0].image : ''),
-          location: location || (returnedProfile ? returnedProfile.rows[0].location : ''),
-          phone: phone || (returnedProfile ? returnedProfile.rows[0].phone : ''),
-          userId: decoded.userId
-        });
-        StatusResponse.success(res, {
-          status: 201,
-          data: {
-            message: 'Users profile created successfully',
-            profile: createdUsersProfile
-          }
-        });
+        if (returnedProfile) {
+          const createdUsersProfile = await returnedProfile.update({
+            firstName: firstName || returnedProfile.dataValues.firstName,
+            lastName: lastName || returnedProfile.dataValues.lastName,
+            bio: bio || returnedProfile.dataValues.bio,
+            image: image || returnedProfile.dataValues.image,
+            location: location || returnedProfile.dataValues.location,
+            phone: phone || returnedProfile.dataValues.phone
+          });
+          StatusResponse.success(res, {
+            status: 200,
+            data: {
+              message: 'Users profile created successfully',
+              profile: createdUsersProfile
+            }
+          });
+        } else {
+          const createdUsersProfile = await profiles.create({
+            firstName,
+            lastName,
+            bio,
+            image,
+            location,
+            phone,
+            userId: decoded.userId
+          });
+          StatusResponse.success(res, {
+            status: 200,
+            data: {
+              message: 'Users profile created successfully',
+              profile: createdUsersProfile
+            }
+          });
+        }
       } catch (error) {
         StatusResponse.unauthorized(res, {
           status: 401,
