@@ -15,6 +15,8 @@ Errnd is a platform where your errands are completed by your communities
 ### Welcome a user [GET]
 
   * Helps to welcome a user to the API
+  
++ Request (application/json)
 
 + Response 200 (application/json)
 
@@ -46,6 +48,7 @@ Errnd is a platform where your errands are completed by your communities
             "password": "password",
             "username": "newuser"
         }
+
 + Response 201 (application/json)
 
     + Headers
@@ -96,6 +99,7 @@ Errnd is a platform where your errands are completed by your communities
                 }
             }
 
+    
             {
                 "status": 400,
                 "data": {
@@ -116,6 +120,7 @@ Errnd is a platform where your errands are completed by your communities
                 "email": "newuser@email.com",
                 "password": "password"
         }
+
 + Response 200 (application/json)
 
     + Headers
@@ -132,7 +137,7 @@ Errnd is a platform where your errands are completed by your communities
                     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImN1c3RvbWVyNDAwMEBjdXN0b21lci5jb20iLCJ1c2VySWQiOjUsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTU1OTE0ODM4MywiZXhwIjoxNTU5MjM0NzgzfQ.Y6Uao5otns3NJSWwGo-XgOwW8PTckVlu1QPgJ11UN04"
                 }
             }
-            
+       
 + Response 401 (application/json)
 
     + Headers
@@ -187,5 +192,216 @@ Errnd is a platform where your errands are completed by your communities
                     "error": {
                         email: 'Invalid email'
                     }
+                }
+                
+## Profile [/profile/{username}]
++ Parameters
+    + username (text) - johndolly
+
+### Create user's profile [POST]
+
+  * Helps a user to populate his profile after signing up onto the platform
+  
++ Request
+
+    + Body
+    
+            {
+                "firstName": "John",
+                "lastName": "Dolly",
+                "image": "https://images.unsplash.com/photo-1497551060073-4c5ab6435f12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80",
+                "location": "Lagos",
+                "bio": "I am a sofware engineer",
+                "phone": "09099933373"
+            }
+    
+    + Headers
+
+            Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJ1bm5lckBydW5uZXIuY29tIiwidXNlcklkIjoxLCJyb2xlIjoiY3VzdG9tZXIiLCJ1c2VybmFtZSI6ImludmFsaWR1c2VyIiwiaWF0IjoxNTU5Mzk2Nzg2LCJleHAiOjE1NTk0ODMxODZ9.0PItRXbVtKezfd6FTLTgEcKYOGd1EY3UVYOLWGcgACo
+        
+
+            
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /profile/johndolly
+
+    + Body        
+    
+    
+            {
+                "status": 200,
+                "data": {
+                    "message": "Users profile created successfully",
+                    "profile": {
+                        "id": 1,
+                        "firstName": "John",
+                        "lastName": "Dolly",
+                        "phone": "09099933373",
+                        "image": "https://images.unsplash.com/photo-1497551060073-4c5ab6435f12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80",
+                        "bio": "I am a sofware engineer",
+                        "location": "Lagos",
+                        "createdAt": "2019-05-30T21:05:53.725Z",
+                        "updatedAt": "2019-06-01T13:42:53.520Z",
+                        "userId": 10
+                    }
+                }
+            }
+            
++ Response 401 (application/json)
+
+    + Headers
+
+            Location: /auth/johndolly
+            
+    + Body        
+    
+            {
+                status: 401,
+                data: {
+                    error: 'Unauthorized, you cannot edit another person's profile',
+                }
+            }
+            
+            {
+                status: 401,
+                data: {
+                    error: 'Unauthorized, user not authenticated',
+                }
+            }
+
+### View a user's profile [GET]
+
+  * Helps a user to get his or other people profile
+  
++ Request (application/json)
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /profile/billzuckerberg
+
+    + Body        
+    
+            {
+                "status": 200,
+                "data": {
+                    "message": "Users profile returned succesfully",
+                    "user": {
+                        "id": 4,
+                        "firstName": "Bill",
+                        "lastName": "Zuckerberg",
+                        "phone": "09099933323",
+                        "image": "https://images.unsplash.com/photo-1497551060073-4c5ab6435f12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80",
+                        "bio": "I am a sofware engineer and ceo",
+                        "location": "Lagos",
+                        "createdAt": "2019-06-01T13:47:31.063Z",
+                        "updatedAt": "2019-06-01T13:47:31.063Z",
+                        "role": "customer",
+                        "email": "runner@runner.com",
+                        "username": "runner"
+                    }
+                }
+            }
+
++ Response 404 (application/json)
+
+    + Headers
+
+            Location: /profile/unregistereduser
+
+    + Body        
+    
+            {
+                "status": 404,
+                "data": {
+                    "message": "User's profile not found",
+                    "profile": {}
+                }
+            }
+
+## Role [/role/{username}]
++ Parameters
+    + username (text) - johndolly
+
+### Switch user's role [PUT]
+
+  * Helps a user to switch his role from runner to customer and vice versa
+  
++ Request
+
+    + Body
+    
+            {
+                "role": "customer"
+            }
+    
+    + Headers
+
+            Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJ1bm5lckBydW5uZXIuY29tIiwidXNlcklkIjoxLCJyb2xlIjoiY3VzdG9tZXIiLCJ1c2VybmFtZSI6ImludmFsaWR1c2VyIiwiaWF0IjoxNTU5Mzk2Nzg2LCJleHAiOjE1NTk0ODMxODZ9.0PItRXbVtKezfd6FTLTgEcKYOGd1EY3UVYOLWGcgACo
+        
+
+            
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /role/johndolly
+
+    + Body        
+    
+    
+            {
+                "status": 200,
+                "data": {
+                    "message": "Users role switched succesfully"
+                }
+            }
+        
++ Response 404 (application/json)
+
+    + Headers
+
+            Location: /role/johndolly
+
+    + Body        
+    
+            {
+                "status": 404,
+                "data": {
+                    "message": "User's profile not found",
+                    "profile": {}
+                }
+            }
+                
++ Response 401 (application/json)
+
+    + Headers
+
+            Location: /role/johndolly
+            
+    + Body        
+    
+            {
+                status: 401,
+                data: {
+                    error: 'Unauthorized, you cannot switch another person's role'
+                }
+            }   
+              
++ Response 400 (application/json)
+
+    + Headers
+
+            Location: /role/johndolly
+
+    + Body        
+    
+            {
+                "status": 400,
+                "data": {
+                    "error": "role must be runner or customer"
                 }
             }
