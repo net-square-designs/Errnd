@@ -10,7 +10,8 @@ import { StatusResponse } from './helpers';
 import {
   auth,
   profile,
-  roles
+  roles,
+  services
 } from './routes';
 
 const PORT = process.env.PORT || 3005;
@@ -26,6 +27,7 @@ app.use(validator());
 app.use('/api/v1/auth', auth);
 app.use('/api/v1/profile', profile);
 app.use('/api/v1/role', roles);
+app.use('/api/v1/services', services);
 
 // Default to here on home route
 app.get('/', (req, res) => StatusResponse.success(res, {

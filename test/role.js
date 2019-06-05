@@ -13,6 +13,7 @@ const newInvalidUserRole = {
   role: 'invalidcustomer'
 };
 
+const noToken = '';
 
 const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RydW5uZXIxQGVycm5kLmNvbSIsInVzZXJJZCI6MSwicm9sZSI6InJ1bm5lciIsInVzZXJuYW1lIjoidGVzdHJ1bm5lcjEiLCJpYXQiOjE1NTkyNDkwODksImV4cCI6MTk5OTk5OTk5OX0.tYs-XsFksexcgSjke1dXoInEi_ZrgU6OKuQD_0tI-ew';
 
@@ -29,6 +30,18 @@ describe('Errnd Role Test Suite', () => {
       res.body.should.have.property('data');
       res.body.should.have.property('status');
       res.body.data.message.should.equal('Users role switched succesfully');
+    });
+
+    it('should return status code 400 if no token is provided', async () => {
+      const res = await chai.request(app)
+        .put('/api/v1/role/testrunner1')
+        .set('authorization', noToken)
+        .send(newUserRole);
+      res.status.should.equal(400);
+      res.body.should.be.a('object');
+      res.body.should.have.property('data');
+      res.body.should.have.property('status');
+      res.body.data.error.token.should.equal('No token provided, please provide one');
     });
 
     it('should return status code 400 if role is not runner', async () => {

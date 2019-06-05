@@ -1,11 +1,11 @@
 import express from 'express';
 import { Profile } from '../controllers';
-import { validateUsersProfileExists } from '../middlewares';
+import { validateUsersProfileExists, validateToken } from '../middlewares';
 
 const router = express.Router();
 
 router.get('/:username', validateUsersProfileExists, Profile.viewProfile);
 
-router.post('/:username', Profile.createProfile);
+router.post('/:username', validateToken, Profile.createProfile);
 
 export default router;

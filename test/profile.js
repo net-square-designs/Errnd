@@ -16,6 +16,7 @@ const newUserProfile = {
 
 const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RydW5uZXIxQGVycm5kLmNvbSIsInVzZXJJZCI6MSwicm9sZSI6InJ1bm5lciIsInVzZXJuYW1lIjoidGVzdHJ1bm5lcjEiLCJpYXQiOjE1NTkyNDkwODksImV4cCI6MTk5OTk5OTk5OX0.tYs-XsFksexcgSjke1dXoInEi_ZrgU6OKuQD_0tI-ew';
 const invalidToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RydW5uZXIxQGVycm5kLmNvbSIsInVzZXJJZCI6MSwicm9sZSI6InJ1bm5lciIsInVzZXJuYW1lIjoidGVzdHJ1bm5lcjEiLCJpYXQiOjE1NTkyNDkwODksImV4cCI6MTk5OTk5OTk5OX0.qVzoEX0d1YVTokAnpylou8gtbE7a5aPWl-NEUkNO7sE';
+const noToken = '';
 
 describe('Errnd Profile Test Suite', () => {
   // ==== Create a user profile ==== //
@@ -30,6 +31,18 @@ describe('Errnd Profile Test Suite', () => {
       res.body.should.have.property('data');
       res.body.should.have.property('status');
       res.body.data.message.should.equal('Users profile created successfully');
+    });
+
+    it('should return status code 400 if no token is provided', async () => {
+      const res = await chai.request(app)
+        .post('/api/v1/profile/testrunner1')
+        .set('authorization', noToken)
+        .send(newUserProfile);
+      res.status.should.equal(400);
+      res.body.should.be.a('object');
+      res.body.should.have.property('data');
+      res.body.should.have.property('status');
+      res.body.data.error.token.should.equal('No token provided, please provide one');
     });
 
     it('should return status code 401 if a user want to edit another person profile', async () => {
