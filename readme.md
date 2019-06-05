@@ -1,5 +1,5 @@
 [![CircleCI](https://circleci.com/gh/net-square-designs/Errnd/tree/develop.svg?style=svg)](https://circleci.com/gh/net-square-designs/Errnd/tree/develop)
-[![Coverage Status](https://coveralls.io/repos/github/net-square-designs/Errnd/badge.svg?branch=ft-implement-user-profile)](https://coveralls.io/github/net-square-designs/Errnd?branch=ft-implement-user-profile)
+[![Coverage Status](https://coveralls.io/repos/github/net-square-designs/Errnd/badge.svg?branch=develop)](https://coveralls.io/github/net-square-designs/Errnd?branch=develop)
 
 # Errnd
 ## Description
@@ -29,6 +29,32 @@ Errnd is a platform where your errands are completed by your communities
     ``` 
     POST /auth/login 
     ```
+* Create a profile
+
+    ``` 
+    POST /profile/:username
+    ```
+* View a profile
+
+    ``` 
+    GET /profile/:username 
+    ```
+* Switch roles
+
+    ``` 
+    PUT /role/:username
+    ```
+* Create a service
+
+    ``` 
+    POST /services/:username 
+    ```
+* Update a service
+
+    ``` 
+    PUT /services/:username/update/:serviceId 
+    ```
+
 ## Installation
  * Ensure you have node 10.x.x installed.
  
