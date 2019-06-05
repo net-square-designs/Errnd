@@ -10,6 +10,7 @@ Errnd is a platform where your errands are completed by your communities
   * Users can create an account and log in
   * Users can create a profile and view their profile or others profile
   * Users can switch thier role from runner to customer and vice versa
+  * Users can create and update services
 
 
 ## Welcome Page [/]
@@ -405,5 +406,216 @@ Errnd is a platform where your errands are completed by your communities
                 "status": 400,
                 "data": {
                     "error": "role must be runner or customer"
+                }
+            }
+            
+            
+## Create a Service [/services/{username}]
++ Parameters
+    + username (text) - johndolly
+
+### A runner can create a service [POST]
+
+  * Helps a runner to create a service
+  
++ Request
+
+    + Body
+    
+            {
+              "category": "Computer Science",
+              "subcategory": "Web Development",
+              "title": "Develop your web app",
+              "description": "I can develop your web app using express,react and react native following TDD and Agile",
+              "price": 5000000,
+              "days": 3,
+              "media": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
+            }
+    
+    + Headers
+
+            Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJ1bm5lckBydW5uZXIuY29tIiwidXNlcklkIjoxLCJyb2xlIjoiY3VzdG9tZXIiLCJ1c2VybmFtZSI6ImludmFsaWR1c2VyIiwiaWF0IjoxNTU5Mzk2Nzg2LCJleHAiOjE1NTk0ODMxODZ9.0PItRXbVtKezfd6FTLTgEcKYOGd1EY3UVYOLWGcgACo
+        
+
+            
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /services/johndolly
+
+    + Body        
+    
+    
+            { 
+              "status": 201,
+              "data": {
+                   "message": "Service created successfully",
+                   "service": {
+                       "id": 1, 
+                       "category": 
+                       "Computer Science", 
+                       "subcategory": 
+                       "Web Development", 
+                       "title": "Develop your web app", 
+                       "description": "I can develop your web app using express,react and react native following TDD and Agile",
+                       "price": 5000000, 
+                       "days": 3, 
+                       "media": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80", 
+                       "userId": 1, 
+                       "updatedAt": "2019-06-05T12:46:55.003Z", 
+                       "createdAt": "2019-06-05T12:46:55.003Z" 
+                   } 
+                } 
+            }
+            
++ Response 401 (application/json)
+
+    + Headers
+
+            Location: /services/johndolly
+            
+    + Body        
+    
+            {
+                status: 401,
+                data: {
+                    error: 'Unauthorized, you cannot create a service on behalf of another user',
+                }
+            }
+            
+            {
+                status: 401,
+                data: {
+                    error: 'Unauthorized, user not authenticated',
+                }
+            }
+            
++ Response 400 (application/json)
+
+    + Headers
+
+            Location: /services/johndolly
+            
+    + Body        
+    
+            {
+                "status": 400,
+                "data": {
+                    "error": {
+                        "price": "price must be a number",
+                        "days": ""
+                    }
+                }
+            }
+            
+            {
+                "status": 400,
+                "data": {
+                    "error": {
+                        "category": "category must be filled",
+                        "subcategory": "",
+                        "title": "",
+                        "price": "",
+                        "days": ""
+                    }
+                }
+            }  
+            
+## Update a Service [/services/{username}/update/{serviceId}]
++ Parameters
+    + username (text) - johndolly
+    + serviceId (number) - 1
+
+### A runner can update a service [POST]
+
+  * Helps a runner to update a service he created
+  
++ Request
+
+    + Body
+    
+               {
+                  "category": "Computer Science",
+                  "subcategory": "Web Development",
+                  "title": "Develop your mobile app",
+                  "description": "I can develop your mobile app using Java/android following TDD and Agile",
+                  "price": 3000,
+                  "days": 1,
+                  "media": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
+                }
+
+    + Headers
+
+            Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJ1bm5lckBydW5uZXIuY29tIiwidXNlcklkIjoxLCJyb2xlIjoiY3VzdG9tZXIiLCJ1c2VybmFtZSI6ImludmFsaWR1c2VyIiwiaWF0IjoxNTU5Mzk2Nzg2LCJleHAiOjE1NTk0ODMxODZ9.0PItRXbVtKezfd6FTLTgEcKYOGd1EY3UVYOLWGcgACo
+        
+
+            
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /services/johndolly/update/1
+
+    + Body        
+    
+    
+            {
+                "status": 200,
+                "data": {
+                    "message": "Service updated successfully",
+                    "service": {
+                        "id": 1,
+                        "category": "Computer Science",
+                        "subcategory": "Web Development",
+                        "title": "Develop your mobile app",
+                        "description": "I can develop your mobile app using Java/android following TDD and Agile",
+                        "price": 3000,
+                        "days": 1,
+                        "media": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+                        "createdAt": "2019-06-05T12:46:55.003Z",
+                        "updatedAt": "2019-06-05T14:30:06.576Z",
+                        "userId": 1
+                    }
+                }
+            }
+            
++ Response 401 (application/json)
+
+    + Headers
+
+            Location: /services/johndolly/update/1
+
+            
+    + Body        
+    
+            {
+                status: 401,
+                data: {
+                    error: 'Unauthorized, you cannot update a service on behalf of another user',
+                }
+            }
+            
+            {
+                status: 401,
+                data: {
+                    error: 'Unauthorized, user not authenticated',
+                }
+            }
+            
++ Response 404 (application/json)
+
+    + Headers
+
+            Location: /services/johndolly/update/1
+
+            
+    + Body        
+    
+            {
+                "status": 404,
+                "data": {
+                    "message": "Service not found",
+                    "service": {}
                 }
             }
