@@ -23,7 +23,7 @@ class Services {
   static async create(req, res) {
     const token = req.headers.authorization;
     const {
-      category, subcategory, title, description, price, days, media
+      category, subcategory, title, description, price, days, media, packageoptions
     } = req.body;
 
     const { username } = req.params;
@@ -46,13 +46,19 @@ class Services {
           price,
           days,
           media,
+          packageoptions: JSON.stringify(packageoptions),
           userId: decoded.userId
         });
+
+        const refinedService = Object.assign(createdUsersService, {
+          packageoptions: JSON.parse(createdUsersService.packageoptions)
+        });
+
         StatusResponse.created(res, {
           status: 201,
           data: {
             message: 'Service created successfully',
-            service: createdUsersService
+            service: refinedService
           }
         });
       } catch (error) {
@@ -75,7 +81,7 @@ class Services {
   static async update(req, res) {
     const token = req.headers.authorization;
     const {
-      category, subcategory, title, description, price, days, media
+      category, subcategory, title, description, price, days, media, packageoptions
     } = req.body;
 
     const { username, serviceId } = req.params;
@@ -105,13 +111,20 @@ class Services {
             description: description || returnedService.dataValues.description,
             price: price || returnedService.dataValues.price,
             days: days || returnedService.dataValues.days,
-            media: media || returnedService.dataValues.media
+            media: media || returnedService.dataValues.media,
+            packageoptions: JSON.stringify(packageoptions)
+            || returnedService.dataValues.packageoptions
           });
+
+          const refinedService = Object.assign(updatedUsersService, {
+            packageoptions: JSON.parse(updatedUsersService.packageoptions)
+          });
+
           StatusResponse.success(res, {
             status: 200,
             data: {
               message: 'Service updated successfully',
-              service: updatedUsersService
+              service: refinedService
             }
           });
         } else {
