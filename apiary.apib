@@ -422,15 +422,28 @@ Errnd is a platform where your errands are completed by your communities
 
     + Body
     
-            {
-              "category": "Computer Science",
-              "subcategory": "Web Development",
-              "title": "Develop your web app",
-              "description": "I can develop your web app using express,react and react native following TDD and Agile",
-              "price": 5000000,
-              "days": 3,
-              "media": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
-            }
+                {
+                     "category": "Computer Science",
+                     "subcategory": "Web Development",
+                     "title": "Develop your web app", 
+                     "description": "I can develop your web app using express,react and react native following TDD and Agile",
+                     "price": 3500,
+                     "days": 3,
+                     "media": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+                     "packageoptions": [{
+                        "serviceA": "add map to the web app",
+                        "quantity": 1,
+                        "type": "basic",
+                        "price": 2500
+                     },
+                    {
+                     "serviceB": "add timer to the web app",
+                     "quantity": 1,
+                     "type": "basic",
+                     "price": 1000
+                    }]
+                }
+
     
     + Headers
 
@@ -447,26 +460,38 @@ Errnd is a platform where your errands are completed by your communities
     + Body        
     
     
-            { 
-              "status": 201,
-              "data": {
-                   "message": "Service created successfully",
-                   "service": {
-                       "id": 1, 
-                       "category": 
-                       "Computer Science", 
-                       "subcategory": 
-                       "Web Development", 
-                       "title": "Develop your web app", 
-                       "description": "I can develop your web app using express,react and react native following TDD and Agile",
-                       "price": 5000000, 
-                       "days": 3, 
-                       "media": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80", 
-                       "userId": 1, 
-                       "updatedAt": "2019-06-05T12:46:55.003Z", 
-                       "createdAt": "2019-06-05T12:46:55.003Z" 
-                   } 
-                } 
+            {
+                "status": 201,
+                "data": {
+                    "message": "Service created successfully",
+                    "service": {
+                        "id": 1,
+                        "category": "Computer Science",
+                        "subcategory": "Web Development",
+                        "title": "Develop your web app",
+                        "description": "I can develop your web app using express,react and react native following TDD and Agile",
+                        "price": 3500,
+                        "days": 3,
+                        "media": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+                        "packageoptions": [
+                            {
+                                "serviceA": "add map to the web app",
+                                "quantity": 1,
+                                "type": "basic",
+                                "price": 2500
+                            },
+                            {
+                                "serviceB": "add timer to the web app",
+                                "quantity": 1,
+                                "type": "basic",
+                                "price": 1000
+                            }
+                        ],
+                        "userId": 1,
+                        "updatedAt": "2019-06-06T12:49:06.704Z",
+                        "createdAt": "2019-06-06T12:49:06.704Z"
+                    }
+                }
             }
             
 + Response 401 (application/json)
@@ -540,9 +565,21 @@ Errnd is a platform where your errands are completed by your communities
                   "subcategory": "Web Development",
                   "title": "Develop your mobile app",
                   "description": "I can develop your mobile app using Java/android following TDD and Agile",
-                  "price": 3000,
+                  "price": 3500,
                   "days": 1,
-                  "media": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
+                  "media": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+                  "packageoptions": [{
+                        "serviceA": "add map to the mobile app",
+                        "quantity": 1,
+                        "type": "basic",
+                        "price": 2500
+                     },
+                    {
+                     "serviceB": "add timer to the mobile app",
+                     "quantity": 1,
+                     "type": "basic",
+                     "price": 1000
+                    }]
                 }
 
     + Headers
@@ -570,9 +607,21 @@ Errnd is a platform where your errands are completed by your communities
                         "subcategory": "Web Development",
                         "title": "Develop your mobile app",
                         "description": "I can develop your mobile app using Java/android following TDD and Agile",
-                        "price": 3000,
+                        "price": 3500,
                         "days": 1,
                         "media": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+                        "packageoptions": [{
+                        "serviceA": "add map to the mobile app",
+                        "quantity": 1,
+                        "type": "basic",
+                        "price": 2500
+                        },
+                        {
+                         "serviceB": "add timer to the mobile app",
+                         "quantity": 1,
+                         "type": "basic",
+                         "price": 1000
+                        }]
                         "createdAt": "2019-06-05T12:46:55.003Z",
                         "updatedAt": "2019-06-05T14:30:06.576Z",
                         "userId": 1
