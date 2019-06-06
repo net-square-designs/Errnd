@@ -6,7 +6,8 @@ export default (sequelize, DataTypes) => {
     description: DataTypes.STRING,
     price: DataTypes.INTEGER,
     days: DataTypes.INTEGER,
-    media: DataTypes.STRING
+    media: DataTypes.STRING,
+    packageoptions: DataTypes.STRING
   }, {});
   Services.associate = (models) => {
     Services.belongsTo(models.users, {

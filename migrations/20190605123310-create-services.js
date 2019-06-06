@@ -28,6 +28,9 @@ export function up(queryInterface, Sequelize) {
     media: {
       type: Sequelize.STRING
     },
+    packageoptions: {
+      type: Sequelize.STRING
+    },
     userId: {
       type: Sequelize.INTEGER,
       allowNull: false,
