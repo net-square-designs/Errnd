@@ -11,6 +11,7 @@ Errnd is a platform where your errands are completed by your communities
   * Users can create a profile and view their profile or others profile
   * Users can switch thier role from runner to customer and vice versa
   * Users can create and update services
+  * Users can view services created
 
 
 ## Welcome Page [/]
@@ -410,7 +411,7 @@ Errnd is a platform where your errands are completed by your communities
             }
             
             
-## Create a Service [/services/{username}]
+## Services [/services/{username}]
 + Parameters
     + username (text) - johndolly
 
@@ -547,6 +548,70 @@ Errnd is a platform where your errands are completed by your communities
                 }
             }  
             
+### Retrieve all created services by a runner [GET]
+
+  * Helps to retrieve all created services by a runner
+  
++ Request (application/json)
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /services/johndolly
+
+    + Body        
+    
+    
+            {
+                "status": 200,
+                "data": {
+                    "message": "All runner services returned successfully",
+                    "services": [
+                        {
+                            "id": 2,
+                            "category": "Phones",
+                            "subcategory": "Android phone repair",
+                            "title": "Repair your Android phone",
+                            "description": "I can repair any type of android device from Samsung to Techno, itel, infinix etc",
+                            "price": 1200,
+                            "days": 1,
+                            "media": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+                            "packageoptions": [
+                                {
+                                    "serviceA": "add music to your androis phone",
+                                    "quantity": 3,
+                                    "type": "basic",
+                                    "price": 450
+                                }
+                            ],
+                            "createdAt": "2019-06-06T17:09:27.138Z",
+                            "updatedAt": "2019-06-06T17:09:27.138Z",
+                            "user": {
+                                "email": "testrunner2@errnd.com",
+                                "username": "testrunner2"
+                            }
+                        }
+                    ]
+                }
+            }
+            
++ Response 404 (application/json)
+
+    + Headers
+
+            Location: /services/johndolly/1
+
+            
+    + Body        
+    
+            {
+                "status": 404,
+                "data": {
+                    "message": "Runner not found"
+                }
+            }
+
 ## Update a Service [/services/{username}/update/{serviceId}]
 + Parameters
     + username (text) - johndolly
@@ -666,5 +731,160 @@ Errnd is a platform where your errands are completed by your communities
                 "data": {
                     "message": "Service not found",
                     "service": {}
+                }
+            }
+            
+## View all services [/services]
+
+### Retrieve all created services [GET]
+
+  * Helps to retrieve all created services
+  
++ Request (application/json)
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /services
+
+    + Body        
+    
+    
+            {
+                "status": 200,
+                "data": {
+                    "message": "All runners services returned successfully",
+                    "services": [
+                        {
+                            "id": 2,
+                            "category": "Phones",
+                            "subcategory": "Android phone repair",
+                            "title": "Repair your Android phone",
+                            "description": "I can repair any type of android device from Samsung to Techno, itel, infinix etc",
+                            "price": 1200,
+                            "days": 1,
+                            "media": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+                            "packageoptions": [
+                                {
+                                    "serviceA": "add music to your androis phone",
+                                    "quantity": 3,
+                                    "type": "basic",
+                                    "price": 450
+                                }
+                            ],
+                            "createdAt": "2019-06-06T17:09:27.138Z",
+                            "updatedAt": "2019-06-06T17:09:27.138Z",
+                            "user": {
+                                "email": "testrunner2@errnd.com",
+                                "username": "testrunner2"
+                            }
+                        },
+                        {
+                            "id": 1,
+                            "category": "Computer Science",
+                            "subcategory": "Web Development",
+                            "title": "Develop your web app",
+                            "description": "I can develop your web app using express,react and react native following TDD and Agile",
+                            "price": 3500,
+                            "days": 3,
+                            "media": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+                            "packageoptions": [
+                                {
+                                    "serviceA": "add map to the web app",
+                                    "quantity": 1,
+                                    "type": "basic",
+                                    "price": 2500
+                                },
+                                {
+                                    "serviceB": "add timer to the web app",
+                                    "quantity": 1,
+                                    "type": "basic",
+                                    "price": 1000
+                                }
+                            ],
+                            "createdAt": "2019-06-06T12:49:06.704Z",
+                            "updatedAt": "2019-06-06T12:49:06.704Z",
+                            "user": {
+                                "email": "testrunner1@errnd.com",
+                                "username": "testrunner1"
+                            }
+                        }
+                    ]
+                }
+            }
+            
+## View a specific services [/services/{username}/{serviceId}]
++ Parameters
+    + username (text) - johndolly
+    + serviceId (number) - 1
+
+### Retrieve a specific services by a runner [GET]
+
+  * Helps to retrieve a specific services by a runner
+  
++ Request (application/json)
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /services/johndolly/1
+
+    + Body        
+    
+    
+            {
+                "status": 200,
+                "data": {
+                    "message": "Specific runner services returned successfully",
+                    "services": [
+                        {
+                            "id": 1,
+                            "category": "Computer Science",
+                            "subcategory": "Web Development",
+                            "title": "Develop your web app",
+                            "description": "I can develop your web app using express,react and react native following TDD and Agile",
+                            "price": 3500,
+                            "days": 3,
+                            "media": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+                            "packageoptions": [
+                                {
+                                    "serviceA": "add map to the web app",
+                                    "quantity": 1,
+                                    "type": "basic",
+                                    "price": 2500
+                                },
+                                {
+                                    "serviceB": "add timer to the web app",
+                                    "quantity": 1,
+                                    "type": "basic",
+                                    "price": 1000
+                                }
+                            ],
+                            "createdAt": "2019-06-06T12:49:06.704Z",
+                            "updatedAt": "2019-06-06T12:49:06.704Z",
+                            "user": {
+                                "email": "testrunner1@errnd.com",
+                                "username": "testrunner1"
+                            }
+                        }
+                    ]
+                }
+            }
+            
++ Response 404 (application/json)
+
+    + Headers
+
+            Location: /services/johndolly/1
+
+            
+    + Body        
+    
+            {
+                "status": 404,
+                "data": {
+                    "message": "Runner not found"
                 }
             }
