@@ -135,4 +135,63 @@ describe('Errnd Services Test Suite', () => {
       res.body.data.error.should.equal('Unauthorized, user not authenticated');
     });
   });
+
+  // ==== Retrieve all services ==== //
+  describe(' GET services/ - Retrieve all services', () => {
+    it('should return status code 200 on retrieving all services', async () => {
+      const res = await chai.request(app)
+        .get('/api/v1/services');
+      res.status.should.equal(200);
+      res.body.should.be.a('object');
+      res.body.should.have.property('data');
+      res.body.should.have.property('status');
+      res.body.data.message.should.equal('All runners services returned successfully');
+    });
+  });
+
+  // ==== Retrieve a specific runner services ==== //
+  describe(' GET services/:username/:serviceId - Retrieve a specific runner services', () => {
+    it('should return status code 200 on retrieving a specific runner services', async () => {
+      const res = await chai.request(app)
+        .get('/api/v1/services/testrunner1/1');
+      res.status.should.equal(200);
+      res.body.should.be.a('object');
+      res.body.should.have.property('data');
+      res.body.should.have.property('status');
+      res.body.data.message.should.equal('Specific runner services returned successfully');
+    });
+
+    it('should return status code 404 on runner not found', async () => {
+      const res = await chai.request(app)
+        .get('/api/v1/services/testrunner18388399390011123242349483989434/1');
+      res.status.should.equal(404);
+      res.body.should.be.a('object');
+      res.body.should.have.property('data');
+      res.body.should.have.property('status');
+      res.body.data.message.should.equal('Runner not found');
+    });
+  });
+
+  // ==== Retrieve all services by a runner ==== //
+  describe(' GET services/:username - Retrieve all services by a runner', () => {
+    it('should return status code 200 on retrieving all services by a runner', async () => {
+      const res = await chai.request(app)
+        .get('/api/v1/services/testrunner1');
+      res.status.should.equal(200);
+      res.body.should.be.a('object');
+      res.body.should.have.property('data');
+      res.body.should.have.property('status');
+      res.body.data.message.should.equal('All runner services returned successfully');
+    });
+
+    it('should return status code 404 on runner not found', async () => {
+      const res = await chai.request(app)
+        .get('/api/v1/services/testrunner1838839939001112324234948398943467');
+      res.status.should.equal(404);
+      res.body.should.be.a('object');
+      res.body.should.have.property('data');
+      res.body.should.have.property('status');
+      res.body.data.message.should.equal('Runner not found');
+    });
+  });
 });

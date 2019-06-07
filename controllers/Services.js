@@ -2,10 +2,11 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import jwtDecode from 'jwt-decode';
 import model from '../models';
-import { StatusResponse } from '../helpers';
+import { StatusResponse, findUser } from '../helpers';
+import refineServices from '../helpers/refineServices';
 
 dotenv.config();
-const { services } = model;
+const { services, users } = model;
 
 /**
  * @description - This class is all about users offered services
@@ -145,6 +146,126 @@ class Services {
         });
       }
     }
+  }
+
+  /**
+   * @description - This method takes care of getting a runner services
+   * @param {object} req - request object
+   * @param {object} res - response object
+   * @returns {object} runner services
+   */
+  static async getAllRunnerServices(req, res) {
+    const { username } = req.params;
+
+    const foundUser = await findUser('username', username);
+    if (!foundUser) {
+      StatusResponse.notfound(res, {
+        status: 404,
+        data: {
+          message: 'Runner not found'
+        }
+      });
+    } else {
+      const returnedServices = await services.findAndCountAll({
+        where: {
+          userId: foundUser.id
+        },
+        include: [
+          {
+            model: users,
+            as: 'user',
+            attributes: { exclude: ['id', 'password', 'createdAt', 'updatedAt', 'role'] }
+          }
+        ],
+        attributes: { exclude: ['userId'] },
+        order: [['id', 'DESC']]
+      });
+
+      const refinedServices = refineServices(returnedServices);
+
+      StatusResponse.success(res, {
+        status: 200,
+        data: {
+          message: 'All runner services returned successfully',
+          services: refinedServices
+        }
+      });
+    }
+  }
+
+  /**
+   * @description - This method takes care of getting a specific runner services
+   * @param {object} req - request object
+   * @param {object} res - response object
+   * @returns {object} specific runner services
+   */
+  static async getSpecificRunnerServices(req, res) {
+    const { username, serviceId } = req.params;
+
+    const foundUser = await findUser('username', username);
+    if (!foundUser) {
+      StatusResponse.notfound(res, {
+        status: 404,
+        data: {
+          message: 'Runner not found'
+        }
+      });
+    } else {
+      const returnedServices = await services.findAndCountAll({
+        where: {
+          id: serviceId,
+          userId: foundUser.id
+        },
+        include: [
+          {
+            model: users,
+            as: 'user',
+            attributes: { exclude: ['id', 'password', 'createdAt', 'updatedAt', 'role'] }
+          }
+        ],
+        attributes: { exclude: ['userId'] },
+      });
+
+      const refinedServices = refineServices(returnedServices);
+
+      StatusResponse.success(res, {
+        status: 200,
+        data: {
+          message: 'Specific runner services returned successfully',
+          services: refinedServices
+        }
+      });
+    }
+  }
+
+  /**
+   * @description - This method takes care of getting all services created by all runners
+   * @param {object} req - request object
+   * @param {object} res - response object
+   * @returns {object} all runners services
+   */
+  static async getAllRunnersServices(req, res) {
+    const returnedServices = await services.findAndCountAll({
+      include: [
+        {
+          model: users,
+          as: 'user',
+          attributes: { exclude: ['id', 'password', 'createdAt', 'updatedAt', 'role'] }
+        }
+      ],
+      attributes: { exclude: ['userId'] },
+      order: [['id', 'DESC']]
+    });
+
+    const refinedServices = refineServices(returnedServices);
+
+    StatusResponse.success(res, {
+      status: 200,
+      data: {
+        message: 'All runners services returned successfully',
+        services: refinedServices
+      }
+    });
   }
 }
 
