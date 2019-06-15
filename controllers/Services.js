@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import { Op } from 'sequelize';
 import dotenv from 'dotenv';
 import jwtDecode from 'jwt-decode';
 import model from '../models';
@@ -266,6 +267,56 @@ class Services {
         services: refinedServices
       }
     });
+  }
+
+  /**
+   * @description - This method takes care of searching for services based on some parameters
+   * @param {object} req - request object
+   * @param {object} res - response object
+   * @returns {object} services matching some parameters
+   */
+  static async search(req, res) {
+    const { query } = req.query;
+    const returnedServices = await services.findAndCountAll({
+      where: {
+        [Op.or]: {
+          category: { [Op.iLike]: `%${query}%` },
+          subcategory: { [Op.iLike]: `%${query}%` },
+          title: { [Op.iLike]: `%${query}%` },
+          description: { [Op.iLike]: `%${query}%` },
+          price: Number(query) ? query : null,
+        }
+      },
+      include: [
+        {
+          model: users,
+          as: 'user',
+          attributes: { exclude: ['id', 'password', 'createdAt', 'updatedAt', 'role'] }
+        }
+      ],
+      attributes: { exclude: ['userId'] },
+      order: [['id', 'DESC']]
+    });
+
+    if (returnedServices.count > 0) {
+      const refinedServices = refineServices(returnedServices);
+
+      StatusResponse.success(res, {
+        status: 200,
+        data: {
+          message: 'Searched services returned successfully',
+          services: refinedServices
+        }
+      });
+    } else {
+      StatusResponse.notfound(res, {
+        status: 404,
+        data: {
+          message: 'No services matching the searched parameter',
+          services: {}
+        }
+      });
+    }
   }
 }
 
