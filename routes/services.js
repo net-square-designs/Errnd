@@ -1,8 +1,11 @@
 import express from 'express';
 import { Services } from '../controllers';
 import { validateServicesInput, validateToken } from '../middlewares';
+import validateSearchServicesUrl from '../middlewares/validateSearchServicesUrl';
 
 const router = express.Router();
+
+router.get('/search', validateSearchServicesUrl, Services.search);
 
 router.post('/:username', validateServicesInput, validateToken, Services.create);
 
