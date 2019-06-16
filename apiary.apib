@@ -12,6 +12,8 @@ Errnd is a platform where your errands are completed by your communities
   * Users can switch thier role from runner to customer and vice versa
   * Users can create and update services
   * Users can view services created
+  * Users can search for services
+  * Users can create, retrieve, search and delete services bookmarked
 
 
 ## Welcome Page [/]
@@ -886,5 +888,601 @@ Errnd is a platform where your errands are completed by your communities
                 "status": 404,
                 "data": {
                     "message": "Runner not found"
+                }
+            }
+            
+## Search for services [/services/search?query=Develop your web app]
+
+### Retrieve services by searching for them [GET]
+
+  * Helps to retrieve services that match certain search parameters
+  
++ Request (application/json)
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /services/search?query=Develop your web app
+
+    + Body        
+    
+    
+            {
+                "status": 200,
+                "data": {
+                    "message": "Searched services returned successfully",
+                    "services": [
+                        {
+                            "id": 1,
+                            "category": "Computer Science",
+                            "subcategory": "Web Development",
+                            "title": "Develop your web app",
+                            "description": "I can develop your web app using express,react and react native following TDD and Agile",
+                            "price": 3500,
+                            "days": 3,
+                            "media": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+                            "packageoptions": [
+                                {
+                                    "serviceA": "add map to the web app",
+                                    "quantity": 1,
+                                    "type": "basic",
+                                    "price": 2500
+                                },
+                                {
+                                    "serviceB": "add timer to the web app",
+                                    "quantity": 1,
+                                    "type": "basic",
+                                    "price": 1000
+                                }
+                            ],
+                            "createdAt": "2019-06-06T12:49:06.704Z",
+                            "updatedAt": "2019-06-06T12:49:06.704Z",
+                            "user": {
+                                "email": "testrunner1@errnd.com",
+                                "username": "testrunner1"
+                            }
+                        }
+                    ]
+                }
+            }
+            
++ Response 404 (application/json)
+
+    + Headers
+
+            Location: /services/search?query=vvbvvnvnvnvnvnn
+
+            
+    + Body        
+    
+            {
+                "status": 404,
+                "data": {
+                    "message": "No services matching the searched parameter",
+                    "services": {}
+                }
+            }
+            
++ Response 400 (application/json)
+
+    + Headers
+
+            Location: /services/search?querrrrrrry=Develop your web app
+
+            
+    + Body        
+    
+            {
+                "status": 400,
+                "data": {
+                    "message": "Invalid url, url should be like /search?query="
+                }
+            }        
+            
+            
+## Bookmark services [/bookmarks/create]
+
+### Create a bookmark [POST]
+
+  * Helps to create a bookmark for services
+  
++ Request (application/json)
+
+    + Body
+    
+               {
+                  "title": "Develop your web app"
+               }
+
+    + Headers
+
+            Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJ1bm5lckBydW5uZXIuY29tIiwidXNlcklkIjoxLCJyb2xlIjoiY3VzdG9tZXIiLCJ1c2VybmFtZSI6ImludmFsaWR1c2VyIiwiaWF0IjoxNTU5Mzk2Nzg2LCJleHAiOjE1NTk0ODMxODZ9.0PItRXbVtKezfd6FTLTgEcKYOGd1EY3UVYOLWGcgACo
+        
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /bookmarks/create
+
+    + Body        
+    
+    
+            {
+                "status": 201,
+                "data": {
+                    "message": "Services bookmarked successfully",
+                    "bookmark": {
+                        "id": 1,
+                        "title": "Develop your web app",
+                        "createdAt": "2019-06-16T19:08:05.093Z",
+                        "updatedAt": "2019-06-16T19:08:05.093Z",
+                        "userId": 2,
+                        "serviceId": 1,
+                        "service": {
+                            "category": "Computer Science",
+                            "subcategory": "Web Development",
+                            "title": "Develop your web app",
+                            "description": "I can develop your web app using express,react and react native following TDD and Agile",
+                            "price": 3500,
+                            "days": 3,
+                            "media": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+                            "packageoptions": [
+                                {
+                                    "serviceA": "add map to the web app",
+                                    "quantity": 1,
+                                    "type": "basic",
+                                    "price": 2500
+                                },
+                                {
+                                    "serviceB": "add timer to the web app",
+                                    "quantity": 1,
+                                    "type": "basic",
+                                    "price": 1000
+                                }
+                            ],
+                            "createdAt": "2019-06-06T12:49:06.704Z",
+                            "updatedAt": "2019-06-06T12:49:06.704Z"
+                        },
+                        "user": {
+                            "email": "testrunner2@errnd.com",
+                            "username": "testrunner2"
+                        }
+                    }
+                }
+            }
+            
++ Response 400 (application/json)
+
+    + Headers
+
+            Location: /bookmarks/create
+
+            
+    + Body        
+    
+            {
+                "status": 400,
+                "data": {
+                    "error": {
+                        "token": "No token provided, please provide one"
+                    }
+                }
+            }
+            
++ Response 401 (application/json)
+
+    + Headers
+
+            Location: /bookmarks/create
+
+            
+    + Body        
+    
+            {
+                status: 401,
+                data: {
+                    error: 'Unauthorized, user not authenticated',
+                }
+            }   
+
+## Retrieve all bookmarked services [/bookmarks]
+
+### Retrieve bookmarks [GET]
+
+  * Helps to retrieves all bookmarks created by a user
+  
++ Request (application/json)
+
+    + Headers
+
+            Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJ1bm5lckBydW5uZXIuY29tIiwidXNlcklkIjoxLCJyb2xlIjoiY3VzdG9tZXIiLCJ1c2VybmFtZSI6ImludmFsaWR1c2VyIiwiaWF0IjoxNTU5Mzk2Nzg2LCJleHAiOjE1NTk0ODMxODZ9.0PItRXbVtKezfd6FTLTgEcKYOGd1EY3UVYOLWGcgACo
+        
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /bookmarks/create
+
+    + Body        
+    
+    
+            {
+                "status": 200,
+                "data": {
+                    "message": "Bookmarked services returned successfully",
+                    "bookmark": {
+                        "count": 2,
+                        "rows": [
+                            {
+                                "id": 2,
+                                "title": "Develop your mobile app",
+                                "createdAt": "2019-06-16T19:08:05.093Z",
+                                "updatedAt": "2019-06-16T19:08:05.093Z",
+                                "userId": 2,
+                                "serviceId": 1,
+                                "service": {
+                                    "category": "Computer Science",
+                                    "subcategory": "Mobile Development",
+                                    "title": "Develop your mobile app",
+                                    "description": "I can develop your mobile app using react native following TDD and Agile",
+                                    "price": 2500,
+                                    "days": 2,
+                                    "media": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+                                    "packageoptions": [
+                                        {
+                                            "serviceA": "add map to the web app",
+                                            "quantity": 1,
+                                            "type": "basic",
+                                            "price": 1500
+                                        },
+                                        {
+                                            "serviceB": "add timer to the web app",
+                                            "quantity": 1,
+                                            "type": "basic",
+                                            "price": 1000
+                                        }
+                                    ],
+                                    "createdAt": "2019-06-06T12:49:06.704Z",
+                                    "updatedAt": "2019-06-06T12:49:06.704Z"
+                                },
+                                "user": {
+                                    "email": "testrunner2@errnd.com",
+                                    "username": "testrunner2"
+                                }
+                            },
+                            {
+                                "id": 1,
+                                "title": "Develop your web app",
+                                "createdAt": "2019-06-16T03:02:16.093Z",
+                                "updatedAt": "2019-06-16T03:02:16.093Z",
+                                "userId": 2,
+                                "serviceId": 1,
+                                "service": {
+                                    "category": "Computer Science",
+                                    "subcategory": "Web Development",
+                                    "title": "Develop your web app",
+                                    "description": "I can develop your web app using express,react and react native following TDD and Agile",
+                                    "price": 3500,
+                                    "days": 3,
+                                    "media": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+                                    "packageoptions": [
+                                        {
+                                            "serviceA": "add map to the web app",
+                                            "quantity": 1,
+                                            "type": "basic",
+                                            "price": 2500
+                                        },
+                                        {
+                                            "serviceB": "add timer to the web app",
+                                            "quantity": 1,
+                                            "type": "basic",
+                                            "price": 1000
+                                        }
+                                    ],
+                                    "createdAt": "2019-06-06T12:49:06.704Z",
+                                    "updatedAt": "2019-06-06T12:49:06.704Z"
+                                },
+                                "user": {
+                                    "email": "testrunner2@errnd.com",
+                                    "username": "testrunner2"
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+            
++ Response 400 (application/json)
+
+    + Headers
+
+            Location: /bookmarks
+
+            
+    + Body        
+    
+            {
+                "status": 400,
+                "data": {
+                    "error": {
+                        "token": "No token provided, please provide one"
+                    }
+                }
+            }
+            
++ Response 401 (application/json)
+
+    + Headers
+
+            Location: /bookmarks
+
+            
+    + Body        
+    
+            {
+                status: 401,
+                data: {
+                    error: 'Unauthorized, user not authenticated',
+                }
+            }
+            
++ Response 404 (application/json)
+
+    + Headers
+
+            Location: /bookmarks
+
+            
+    + Body        
+    
+            {
+                status: 404,
+                data: {
+                    message: 'No bookmarked services found',
+                    bookmark: {}
+                }
+            }
+            
+## Search for bookmarked services [/bookmarks/search?query=app]
+
+### Search bookmarks [GET]
+
+  * Helps to search for bookmarked services based on search parameters
+  
++ Request (application/json)
+
+    + Headers
+
+            Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJ1bm5lckBydW5uZXIuY29tIiwidXNlcklkIjoxLCJyb2xlIjoiY3VzdG9tZXIiLCJ1c2VybmFtZSI6ImludmFsaWR1c2VyIiwiaWF0IjoxNTU5Mzk2Nzg2LCJleHAiOjE1NTk0ODMxODZ9.0PItRXbVtKezfd6FTLTgEcKYOGd1EY3UVYOLWGcgACo
+        
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /bookmarks/search?query=app
+
+    + Body        
+    
+    
+            {
+                "status": 200,
+                "data": {
+                    "message": "Bookmarked services returned successfully",
+                    "bookmark": {
+                        "count": 2,
+                        "rows": [
+                            {
+                                "id": 2,
+                                "title": "Develop your mobile app",
+                                "createdAt": "2019-06-16T19:08:05.093Z",
+                                "updatedAt": "2019-06-16T19:08:05.093Z",
+                                "userId": 2,
+                                "serviceId": 1,
+                                "service": {
+                                    "category": "Computer Science",
+                                    "subcategory": "Mobile Development",
+                                    "title": "Develop your mobile app",
+                                    "description": "I can develop your mobile app using react native following TDD and Agile",
+                                    "price": 2500,
+                                    "days": 2,
+                                    "media": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+                                    "packageoptions": [
+                                        {
+                                            "serviceA": "add map to the web app",
+                                            "quantity": 1,
+                                            "type": "basic",
+                                            "price": 1500
+                                        },
+                                        {
+                                            "serviceB": "add timer to the web app",
+                                            "quantity": 1,
+                                            "type": "basic",
+                                            "price": 1000
+                                        }
+                                    ],
+                                    "createdAt": "2019-06-06T12:49:06.704Z",
+                                    "updatedAt": "2019-06-06T12:49:06.704Z"
+                                },
+                                "user": {
+                                    "email": "testrunner2@errnd.com",
+                                    "username": "testrunner2"
+                                }
+                            },
+                            {
+                                "id": 1,
+                                "title": "Develop your web app",
+                                "createdAt": "2019-06-16T03:02:16.093Z",
+                                "updatedAt": "2019-06-16T03:02:16.093Z",
+                                "userId": 2,
+                                "serviceId": 1,
+                                "service": {
+                                    "category": "Computer Science",
+                                    "subcategory": "Web Development",
+                                    "title": "Develop your web app",
+                                    "description": "I can develop your web app using express,react and react native following TDD and Agile",
+                                    "price": 3500,
+                                    "days": 3,
+                                    "media": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+                                    "packageoptions": [
+                                        {
+                                            "serviceA": "add map to the web app",
+                                            "quantity": 1,
+                                            "type": "basic",
+                                            "price": 2500
+                                        },
+                                        {
+                                            "serviceB": "add timer to the web app",
+                                            "quantity": 1,
+                                            "type": "basic",
+                                            "price": 1000
+                                        }
+                                    ],
+                                    "createdAt": "2019-06-06T12:49:06.704Z",
+                                    "updatedAt": "2019-06-06T12:49:06.704Z"
+                                },
+                                "user": {
+                                    "email": "testrunner2@errnd.com",
+                                    "username": "testrunner2"
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+            
++ Response 400 (application/json)
+
+    + Headers
+
+            Location: /bookmarks/search?query=app
+
+            
+    + Body        
+    
+            {
+                "status": 400,
+                "data": {
+                    "error": {
+                        "token": "No token provided, please provide one"
+                    }
+                }
+            }
+            
++ Response 401 (application/json)
+
+    + Headers
+
+            Location: /bookmarks/search?query=app
+
+            
+    + Body        
+    
+            {
+                status: 401,
+                data: {
+                    error: 'Unauthorized, user not authenticated',
+                }
+            }
+            
++ Response 404 (application/json)
+
+    + Headers
+
+            Location: /bookmarks/search?query=app
+
+            
+    + Body        
+    
+            {
+                status: 404,
+                data: {
+                    message: 'No bookmarked services found',
+                    bookmark: {}
+                }
+            }   
+            
+## Delete bookmarked services [/bookmarks/remove/{serviceId}]
++ Parameters
+    + serviceId (number) - 1
+
+### Delete bookmarks [DELETE]
+
+  * Helps to delete bookmarked services based
+  
++ Request (application/json)
+
+    + Headers
+
+            Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJ1bm5lckBydW5uZXIuY29tIiwidXNlcklkIjoxLCJyb2xlIjoiY3VzdG9tZXIiLCJ1c2VybmFtZSI6ImludmFsaWR1c2VyIiwiaWF0IjoxNTU5Mzk2Nzg2LCJleHAiOjE1NTk0ODMxODZ9.0PItRXbVtKezfd6FTLTgEcKYOGd1EY3UVYOLWGcgACo
+        
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /bookmarks/remove/1
+
+    + Body        
+    
+    
+            {
+                "status": 200,
+                "data": {
+                    "message": "Bookmarked services deleted successfully"
+                }
+            }
+            
++ Response 400 (application/json)
+
+    + Headers
+
+            Location: /bookmarks/remove/1
+
+            
+    + Body        
+    
+            {
+                "status": 400,
+                "data": {
+                    "error": {
+                        "token": "No token provided, please provide one"
+                    }
+                }
+            }
+            
++ Response 401 (application/json)
+
+    + Headers
+
+            Location: /bookmarks/remove/1
+
+            
+    + Body        
+    
+            {
+                status: 401,
+                data: {
+                    error: 'Unauthorized, user not authenticated',
+                }
+            }
+            
++ Response 404 (application/json)
+
+    + Headers
+
+            Location: /bookmarks/remove/1
+
+            
+    + Body        
+    
+            {
+                status: 404,
+                data: {
+                    message: 'No bookmarked services found',
+                    bookmark: {}
                 }
             }
