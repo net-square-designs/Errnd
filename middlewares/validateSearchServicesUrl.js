@@ -8,7 +8,7 @@ const validateSearchServicesUrl = (req, res, next) => {
     StatusResponse.badRequest(res, {
       status: 400,
       data: {
-        message: 'Invalid url, url should be like services/search?query=',
+        message: 'Invalid url, url should be like /search?query=',
       }
     });
   } else {

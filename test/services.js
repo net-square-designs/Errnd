@@ -224,7 +224,7 @@ describe('Errnd Services Test Suite', () => {
       res.body.should.be.a('object');
       res.body.should.have.property('data');
       res.body.should.have.property('status');
-      res.body.data.message.should.equal('Invalid url, url should be like services/search?query=');
+      res.body.data.message.should.equal('Invalid url, url should be like /search?query=');
     });
   });
 });

@@ -15,6 +15,11 @@ export default (sequelize, DataTypes) => {
       onDelete: 'CASCADE',
       as: 'user'
     });
+    Services.hasMany(models.bookmarks, {
+      foreignKey: 'serviceId',
+      onDelete: 'CASCADE',
+      as: 'bookmarks'
+    });
   };
   return Services;
 };
