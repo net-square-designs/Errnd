@@ -194,4 +194,37 @@ describe('Errnd Services Test Suite', () => {
       res.body.data.message.should.equal('Runner not found');
     });
   });
+
+  // ==== Search for services ==== //
+  describe(' GET services/search?query=Computer Science - Retrieve all services matching specified search params', () => {
+    it('should return status code 200 on retrieving all services matching specified search params', async () => {
+      const res = await chai.request(app)
+        .get('/api/v1/services/search?query=Computer Science');
+      res.status.should.equal(200);
+      res.body.should.be.a('object');
+      res.body.should.have.property('data');
+      res.body.should.have.property('status');
+      res.body.data.message.should.equal('Searched services returned successfully');
+    });
+
+    it('should return status code 404 on no services matching specified search params', async () => {
+      const res = await chai.request(app)
+        .get('/api/v1/services/search?query=nmmmdmkrkrkrkememekekmemeedsksksmdjfjkftjkf394944848848usnsndsnn');
+      res.status.should.equal(404);
+      res.body.should.be.a('object');
+      res.body.should.have.property('data');
+      res.body.should.have.property('status');
+      res.body.data.message.should.equal('No services matching the searched parameter');
+    });
+
+    it('should return status code 400 if invalid url is provided', async () => {
+      const res = await chai.request(app)
+        .get('/api/v1/services/search?queryyyyyyyeyeyehsb=Computer Science');
+      res.status.should.equal(400);
+      res.body.should.be.a('object');
+      res.body.should.have.property('data');
+      res.body.should.have.property('status');
+      res.body.data.message.should.equal('Invalid url, url should be like /search?query=');
+    });
+  });
 });

@@ -5,6 +5,7 @@ import validateUserDoNotExists from './validateUserDoNotExists';
 import validateUsersProfileExists from './validateUsersProfileExists';
 import validateServicesInput from './validateServicesInput';
 import validateToken from './validateToken';
+import validateSearchServicesUrl from './validateSearchServicesUrl';
 
 export {
   validateUserExists,
@@ -13,5 +14,6 @@ export {
   validateUserDoNotExists,
   validateUsersProfileExists,
   validateServicesInput,
-  validateToken
+  validateToken,
+  validateSearchServicesUrl
 };

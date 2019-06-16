@@ -11,7 +11,8 @@ import {
   auth,
   profile,
   roles,
-  services
+  services,
+  bookmarks
 } from './routes';
 
 const PORT = process.env.PORT || 3005;
@@ -28,6 +29,7 @@ app.use('/api/v1/auth', auth);
 app.use('/api/v1/profile', profile);
 app.use('/api/v1/role', roles);
 app.use('/api/v1/services', services);
+app.use('/api/v1/bookmarks', bookmarks);
 
 // Default to here on home route
 app.get('/', (req, res) => StatusResponse.success(res, {
