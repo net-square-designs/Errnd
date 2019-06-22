@@ -12,7 +12,8 @@ import {
   profile,
   roles,
   services,
-  bookmarks
+  bookmarks,
+  messages
 } from './routes';
 
 const PORT = process.env.PORT || 3005;
@@ -30,6 +31,7 @@ app.use('/api/v1/profile', profile);
 app.use('/api/v1/role', roles);
 app.use('/api/v1/services', services);
 app.use('/api/v1/bookmarks', bookmarks);
+app.use('/api/v1/messages', messages);
 
 // Default to here on home route
 app.get('/', (req, res) => StatusResponse.success(res, {
@@ -58,6 +60,5 @@ app.use('/*', (req, res) => StatusResponse.notfound(res, {
 app.listen(PORT, () => {
   console.log(`API live on port =>: ${PORT}`);
 });
-
 
 export default app;
