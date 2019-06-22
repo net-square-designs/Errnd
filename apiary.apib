@@ -14,6 +14,7 @@ Errnd is a platform where your errands are completed by your communities
   * Users can view services created
   * Users can search for services
   * Users can create, retrieve, search and delete services bookmarked
+  * Users can send and receive messages
 
 
 ## Welcome Page [/]
@@ -1484,5 +1485,444 @@ Errnd is a platform where your errands are completed by your communities
                 data: {
                     message: 'No bookmarked services found',
                     bookmark: {}
+                }
+            }
+            
+            
+## Messages [/messages/send/{username}]
++ Parameters
+    + username (text) - testrunner1
+
+### Send a message [POST]
+
+  * Helps a user to send message to another user
+  
++ Request (application/json)
+
+    + Body
+    
+               {
+                  "message": "Hello, I can develop your web app"
+               }
+
+    + Headers
+
+            Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJ1bm5lckBydW5uZXIuY29tIiwidXNlcklkIjoxLCJyb2xlIjoiY3VzdG9tZXIiLCJ1c2VybmFtZSI6ImludmFsaWR1c2VyIiwiaWF0IjoxNTU5Mzk2Nzg2LCJleHAiOjE1NTk0ODMxODZ9.0PItRXbVtKezfd6FTLTgEcKYOGd1EY3UVYOLWGcgACo
+        
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /messages/send/testrunner1
+
+    + Body        
+    
+    
+            {
+                "status": 201,
+                "data": {
+                    "message": "Message sent successfully",
+                    "sentMessage": {
+                        "id": 1,
+                        "message": "Hello, I can develop your web app",
+                        "senderusername": "testrunner2",
+                        "receiverusername": "testrunner1",
+                        "updatedAt": "2019-06-22T07:56:42.157Z",
+                        "createdAt": "2019-06-22T07:56:42.157Z"
+                    }
+                }
+            }
+            
++ Response 400 (application/json)
+
+    + Headers
+
+            Location: /messages/send/testrunner1
+
+            
+    + Body        
+    
+            {
+                "status": 400,
+                "data": {
+                    "error": {
+                        "token": "No token provided, please provide one"
+                    }
+                }
+            }
+            
+            {
+                "status": 400,
+                "data": {
+                    "error": {
+                        "message": "message field cannot be left blank"
+                    }
+                }
+            }
+            
++ Response 401 (application/json)
+
+    + Headers
+
+            Location: /messages/send/testrunner1
+
+            
+    + Body        
+    
+            {
+                status: 401,
+                data: {
+                    error: 'Unauthorized, user not authenticated'
+                }
+            }   
+
+## Retrieve messages [/messages]
+
+### Retrieve all user's messages [GET]
+
+  * Helps a user retrieves all his messages
+  
++ Request (application/json)
+
+    + Headers
+
+            Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJ1bm5lckBydW5uZXIuY29tIiwidXNlcklkIjoxLCJyb2xlIjoiY3VzdG9tZXIiLCJ1c2VybmFtZSI6ImludmFsaWR1c2VyIiwiaWF0IjoxNTU5Mzk2Nzg2LCJleHAiOjE1NTk0ODMxODZ9.0PItRXbVtKezfd6FTLTgEcKYOGd1EY3UVYOLWGcgACo
+        
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /messages
+
+    + Body        
+    
+    
+            {
+                "status": 200,
+                "data": {
+                    "message": "All user's messages returned successfully",
+                    "retrievedMessages": {
+                        "count": 1,
+                        "rows": [
+                            {
+                                "id": 1,
+                                "message": "Hello, I can develop your web app",
+                                "senderusername": "testrunner2",
+                                "receiverusername": "testrunner1",
+                                "createdAt": "2019-06-22T07:56:42.157Z",
+                                "updatedAt": "2019-06-22T07:56:42.157Z"
+                            }
+                        ]
+                    }
+                }
+            }
+            
++ Response 400 (application/json)
+
+    + Headers
+
+            Location: /messages
+
+            
+    + Body        
+    
+            {
+                "status": 400,
+                "data": {
+                    "error": {
+                        "token": "No token provided, please provide one"
+                    }
+                }
+            }
+            
++ Response 401 (application/json)
+
+    + Headers
+
+            Location: /messages
+
+            
+    + Body        
+    
+            {
+                status: 401,
+                data: {
+                    error: 'Unauthorized, user not authenticated'
+                }
+            }
+            
++ Response 404 (application/json)
+
+    + Headers
+
+            Location: /messages
+
+            
+    + Body        
+    
+            {
+                "status": 404,
+                "data": {
+                    "message": "User have not received any messages yet",
+                    "retrievedMessages": {
+                        "count": 0,
+                        "rows": []
+                    }
+                }
+            }
+            
+## Retrieve specific messages [/messages/{username}]
++ Parameters
+    + username (text) - testrunner1
+
+### Retrieve a user's conversation [GET]
+
+  * Helps a user retrieves his conversation with another user
+  
++ Request (application/json)
+
+    + Headers
+
+            Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJ1bm5lckBydW5uZXIuY29tIiwidXNlcklkIjoxLCJyb2xlIjoiY3VzdG9tZXIiLCJ1c2VybmFtZSI6ImludmFsaWR1c2VyIiwiaWF0IjoxNTU5Mzk2Nzg2LCJleHAiOjE1NTk0ODMxODZ9.0PItRXbVtKezfd6FTLTgEcKYOGd1EY3UVYOLWGcgACo
+        
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /messages/testrunner1
+
+    + Body        
+    
+    
+            {
+                "status": 200,
+                "data": {
+                    "message": "User's conversation with this person returned successfully",
+                    "retrievedMessages": {
+                        "count": 1,
+                        "rows": [
+                            {
+                                "id": 1,
+                                "message": "Hello, I can develop your web app",
+                                "senderusername": "testrunner2",
+                                "receiverusername": "testrunner1",
+                                "createdAt": "2019-06-22T07:56:42.157Z",
+                                "updatedAt": "2019-06-22T07:56:42.157Z"
+                            }
+                        ]
+                    }
+                }
+            }
+            
++ Response 400 (application/json)
+
+    + Headers
+
+            Location: /messages/testrunner1
+
+            
+    + Body        
+    
+            {
+                "status": 400,
+                "data": {
+                    "error": {
+                        "token": "No token provided, please provide one"
+                    }
+                }
+            }
+            
++ Response 401 (application/json)
+
+    + Headers
+
+            Location: /messages/testrunner1
+
+            
+    + Body        
+    
+            {
+                status: 401,
+                data: {
+                    error: 'Unauthorized, user not authenticated'
+                }
+            }
+            
++ Response 404 (application/json)
+
+    + Headers
+
+            Location: /messages/testrunner1
+
+            
+    + Body        
+    
+            {
+                "status": 404,
+                "data": {
+                    "message": "User have no conversation with this person"
+                }
+            }
+            
+## Delete specific messages [/messages/remove/{username}]
++ Parameters
+    + username (text) - testrunner1
+
+### Delete a user's conversation [GET]
+
+  * Helps a user delete his conversation with another user
+  
++ Request (application/json)
+
+    + Headers
+
+            Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJ1bm5lckBydW5uZXIuY29tIiwidXNlcklkIjoxLCJyb2xlIjoiY3VzdG9tZXIiLCJ1c2VybmFtZSI6ImludmFsaWR1c2VyIiwiaWF0IjoxNTU5Mzk2Nzg2LCJleHAiOjE1NTk0ODMxODZ9.0PItRXbVtKezfd6FTLTgEcKYOGd1EY3UVYOLWGcgACo
+        
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /messages/remove/testrunner1
+
+    + Body        
+    
+    
+            {
+                "status": 200,
+                "data": {
+                    "message": "Conversation deleted successfully"
+                }
+            }
+            
++ Response 400 (application/json)
+
+    + Headers
+
+            Location: /messages/remove/testrunner1
+
+            
+    + Body        
+    
+            {
+                "status": 400,
+                "data": {
+                    "error": {
+                        "token": "No token provided, please provide one"
+                    }
+                }
+            }
+            
++ Response 401 (application/json)
+
+    + Headers
+
+            Location: /messages/remove/testrunner1
+
+            
+    + Body        
+    
+            {
+                status: 401,
+                data: {
+                    error: 'Unauthorized, user not authenticated'
+                }
+            }
+            
++ Response 404 (application/json)
+
+    + Headers
+
+            Location: /messages/remove/testrunner1
+
+            
+    + Body        
+    
+            {
+                "status": 404,
+                "data": {
+                    "message": "No conversation found"
+                }
+            }
+            
+## Delete all messages [/messages/remove]
+
+### Delete all user's conversation [GET]
+
+  * Helps a user delete all his conversation with every other user
+  
++ Request (application/json)
+
+    + Headers
+
+            Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJ1bm5lckBydW5uZXIuY29tIiwidXNlcklkIjoxLCJyb2xlIjoiY3VzdG9tZXIiLCJ1c2VybmFtZSI6ImludmFsaWR1c2VyIiwiaWF0IjoxNTU5Mzk2Nzg2LCJleHAiOjE1NTk0ODMxODZ9.0PItRXbVtKezfd6FTLTgEcKYOGd1EY3UVYOLWGcgACo
+        
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /messages/remove
+
+    + Body        
+    
+    
+            {
+                "status": 200,
+                "data": {
+                    "message": "All Conversation deleted successfully"
+                }
+            }
+            
++ Response 400 (application/json)
+
+    + Headers
+
+            Location: /messages/remove
+
+            
+    + Body        
+    
+            {
+                "status": 400,
+                "data": {
+                    "error": {
+                        "token": "No token provided, please provide one"
+                    }
+                }
+            }
+            
++ Response 401 (application/json)
+
+    + Headers
+
+            Location: /messages/remove
+
+            
+    + Body        
+    
+            {
+                status: 401,
+                data: {
+                    error: 'Unauthorized, user not authenticated'
+                }
+            }
+            
++ Response 404 (application/json)
+
+    + Headers
+
+            Location: /messages/remove
+
+            
+    + Body        
+    
+            {
+                "status": 404,
+                "data": {
+                    "message": "No conversation found"
                 }
             }
