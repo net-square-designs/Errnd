@@ -20,6 +20,10 @@ export default (sequelize, DataTypes) => {
       onDelete: 'CASCADE',
       as: 'bookmarks'
     });
+    Users.hasMany(models.notifications, {
+      foreignKey: 'senderusername',
+      as: 'notifications'
+    });
   };
   return Users;
 };

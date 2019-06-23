@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import express from 'express';
 import { Services } from '../controllers';
 import { validateServicesInput, validateToken } from '../middlewares';

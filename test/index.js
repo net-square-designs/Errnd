@@ -4,3 +4,5 @@ import './profile';
 import './role';
 import './services';
 import './bookmarks';
+import './messages';
+import './notifications';

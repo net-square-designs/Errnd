@@ -6,6 +6,7 @@ import validateUsersProfileExists from './validateUsersProfileExists';
 import validateServicesInput from './validateServicesInput';
 import validateToken from './validateToken';
 import validateSearchServicesUrl from './validateSearchServicesUrl';
+import validateMessagesInput from './validateMessagesInput';
 
 export {
   validateUserExists,
@@ -15,5 +16,6 @@ export {
   validateUsersProfileExists,
   validateServicesInput,
   validateToken,
-  validateSearchServicesUrl
+  validateSearchServicesUrl,
+  validateMessagesInput
 };

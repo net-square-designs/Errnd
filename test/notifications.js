@@ -5,71 +5,39 @@ import app from '../index';
 chai.use(chaiHttp);
 chai.should();
 
-const newBookmark = {
-  title: 'Develop your web app',
-};
-
 const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RydW5uZXIxQGVycm5kLmNvbSIsInVzZXJJZCI6MSwicm9sZSI6InJ1bm5lciIsInVzZXJuYW1lIjoidGVzdHJ1bm5lcjEiLCJpYXQiOjE1NTkyNDkwODksImV4cCI6MTk5OTk5OTk5OX0.tYs-XsFksexcgSjke1dXoInEi_ZrgU6OKuQD_0tI-ew';
 const invalidToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RydW5uZXIxQGVycm5kLmNvbSIsInVzZXJJZCI6MSwicm9sZSI6InJ1bm5lciIsInVzZXJuYW1lIjoidGVzdHJ1bm5lcjEiLCJpYXQiOjE1NTkyNDkwODksImV4cCI6MTk5OTk5OTk5OX0.qVzoEX0d1YVTokAnpylou8gtbE7a5aPWl-NEUkNO7sE';
 const noToken = '';
-const customerWithNoBookmarkToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImN1c3RvbWVyMkBlcnJuZC5jb20iLCJ1c2VySWQiOjQsInJvbGUiOiJjdXN0b21lciIsInVzZXJuYW1lIjoiY3VzdG9tZXIyIiwiaWF0IjoxNTYwNjg1Mjc4LCJleHAiOjY5OTk5OTk5OTh9.EV9N2PSOp8OY2-LaKHZUCdsNDz4UQQWEhjuUUrCuPeI';
+const userWithNoNotificationsToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImN1c3RvbWVyMkBlcnJuZC5jb20iLCJ1c2VySWQiOjQsInJvbGUiOiJjdXN0b21lciIsInVzZXJuYW1lIjoiY3VzdG9tZXIyIiwiaWF0IjoxNTYwNjg1Mjc4LCJleHAiOjY5OTk5OTk5OTh9.EV9N2PSOp8OY2-LaKHZUCdsNDz4UQQWEhjuUUrCuPeI';
 
-describe('Errnd Bookmarks Test Suite', () => {
-  // ==== Create a new bookmark ==== //
-  describe(' POST bookmarks/create - Create a new bookmark', () => {
-    it('should return status code 201 on creating a new bookmark', async () => {
+describe('Errnd Notifications Test Suite', () => {
+  // ==== Retrieve all user's notifications ==== //
+  describe(" GET notifications/ - Retrieve all user's notifications", () => {
+    it("should return status code 200 on retrieving all user's notifications", async () => {
       const res = await chai.request(app)
-        .post('/api/v1/bookmarks/create/1')
-        .set('authorization', token)
-        .send(newBookmark);
-      res.status.should.equal(201);
-      res.body.should.be.a('object');
-      res.body.should.have.property('data');
-      res.body.should.have.property('status');
-      res.body.data.message.should.equal('Services bookmarked successfully');
-    });
-
-    it('should return status code 401 if token is invalid', async () => {
-      const res = await chai.request(app)
-        .post('/api/v1/bookmarks/create/1')
-        .set('authorization', invalidToken)
-        .send(newBookmark);
-      res.status.should.equal(401);
-      res.body.should.be.a('object');
-      res.body.should.have.property('data');
-      res.body.should.have.property('status');
-      res.body.data.error.should.equal('Unauthorized, user not authenticated');
-    });
-
-    it('should return status code 400 if no token is provided', async () => {
-      const res = await chai.request(app)
-        .post('/api/v1/bookmarks/create/1')
-        .set('authorization', noToken)
-        .send(newBookmark);
-      res.status.should.equal(400);
-      res.body.should.be.a('object');
-      res.body.should.have.property('data');
-      res.body.should.have.property('status');
-      res.body.data.error.token.should.equal('No token provided, please provide one');
-    });
-  });
-
-  // ==== Retrieve all bookmarks by a user ==== //
-  describe(' GET bookmarks/ - Retrieve all bookmarks by a user', () => {
-    it('should return status code 200 it can retrieve all bookmarks by a user', async () => {
-      const res = await chai.request(app)
-        .get('/api/v1/bookmarks')
+        .get('/api/v1/notifications')
         .set('authorization', token);
       res.status.should.equal(200);
       res.body.should.be.a('object');
       res.body.should.have.property('data');
       res.body.should.have.property('status');
-      res.body.data.message.should.equal('Bookmarked services returned successfully');
+      res.body.data.message.should.equal('Notifications returned successfully');
+    });
+
+    it('should return status code 404 if a user has no notifications', async () => {
+      const res = await chai.request(app)
+        .get('/api/v1/notifications')
+        .set('authorization', userWithNoNotificationsToken);
+      res.status.should.equal(404);
+      res.body.should.be.a('object');
+      res.body.should.have.property('data');
+      res.body.should.have.property('status');
+      res.body.data.message.should.equal("You don't have any notifications yet");
     });
 
     it('should return status code 401 if token is invalid', async () => {
       const res = await chai.request(app)
-        .get('/api/v1/bookmarks')
+        .get('/api/v1/notifications')
         .set('authorization', invalidToken);
       res.status.should.equal(401);
       res.body.should.be.a('object');
@@ -78,20 +46,9 @@ describe('Errnd Bookmarks Test Suite', () => {
       res.body.data.error.should.equal('Unauthorized, user not authenticated');
     });
 
-    it('should return status code 404 on bookmark not found', async () => {
-      const res = await chai.request(app)
-        .get('/api/v1/bookmarks')
-        .set('authorization', customerWithNoBookmarkToken);
-      res.status.should.equal(404);
-      res.body.should.be.a('object');
-      res.body.should.have.property('data');
-      res.body.should.have.property('status');
-      res.body.data.message.should.equal('No bookmarked services found');
-    });
-
     it('should return status code 400 if no token is provided', async () => {
       const res = await chai.request(app)
-        .get('/api/v1/bookmarks')
+        .get('/api/v1/notifications')
         .set('authorization', noToken);
       res.status.should.equal(400);
       res.body.should.be.a('object');
@@ -101,22 +58,33 @@ describe('Errnd Bookmarks Test Suite', () => {
     });
   });
 
-  // ==== Search for bookmarks ==== //
-  describe(' GET bookmarks/search?query=Develop your web app - Retrieve all bookmarks matching specified search params', () => {
-    it('should return status code 200 on retrieving all bookmarks matching specified search params', async () => {
+  // ==== Retrieve one of user's notifications ==== //
+  describe(" GET notifications/:notificationId - Retrieve one of user's notifications", () => {
+    it("should return status code 200 on retrieving all user's notifications", async () => {
       const res = await chai.request(app)
-        .get('/api/v1/bookmarks/search?query=Develop your web app')
+        .get('/api/v1/notifications/1')
         .set('authorization', token);
       res.status.should.equal(200);
       res.body.should.be.a('object');
       res.body.should.have.property('data');
       res.body.should.have.property('status');
-      res.body.data.message.should.equal('Bookmarked services returned successfully');
+      res.body.data.message.should.equal('Notification returned successfully');
+    });
+
+    it('should return status code 404 if a user has no notifications', async () => {
+      const res = await chai.request(app)
+        .get('/api/v1/notifications/1')
+        .set('authorization', userWithNoNotificationsToken);
+      res.status.should.equal(404);
+      res.body.should.be.a('object');
+      res.body.should.have.property('data');
+      res.body.should.have.property('status');
+      res.body.data.message.should.equal("You don't have any notifications yet");
     });
 
     it('should return status code 401 if token is invalid', async () => {
       const res = await chai.request(app)
-        .get('/api/v1/bookmarks/search?query=Develop your web app')
+        .get('/api/v1/notifications/1')
         .set('authorization', invalidToken);
       res.status.should.equal(401);
       res.body.should.be.a('object');
@@ -125,56 +93,45 @@ describe('Errnd Bookmarks Test Suite', () => {
       res.body.data.error.should.equal('Unauthorized, user not authenticated');
     });
 
-    it('should return status code 404 on bookmark not found', async () => {
-      const res = await chai.request(app)
-        .get('/api/v1/bookmarks/search?query=xvvvvvvvzzzzzzzzqqqqqqqqq')
-        .set('authorization', token);
-      res.status.should.equal(404);
-      res.body.should.be.a('object');
-      res.body.should.have.property('data');
-      res.body.should.have.property('status');
-      res.body.data.message.should.equal('No bookmarked services found');
-    });
-
     it('should return status code 400 if no token is provided', async () => {
       const res = await chai.request(app)
-        .get('/api/v1/bookmarks/search?query=Develop your web app')
+        .get('/api/v1/notifications/1')
         .set('authorization', noToken);
       res.status.should.equal(400);
       res.body.should.be.a('object');
       res.body.should.have.property('data');
       res.body.should.have.property('status');
       res.body.data.error.token.should.equal('No token provided, please provide one');
-    });
-
-    it('should return status code 400 if invalid url is provided', async () => {
-      const res = await chai.request(app)
-        .get('/api/v1/bookmarks/search?queryyyyyyyeyeyehsb=Develop your web app')
-        .set('authorization', token);
-      res.status.should.equal(400);
-      res.body.should.be.a('object');
-      res.body.should.have.property('data');
-      res.body.should.have.property('status');
-      res.body.data.message.should.equal('Invalid url, url should be like /search?query=');
     });
   });
 
-  // ==== Delete an existing bookmark ==== //
-  describe(' DELETE bookmarks/remove/1 - Delete an existing bookmark', () => {
-    it('should return status code 400 if no token is provided', async () => {
+  // ==== Update user's notifications isread status ==== //
+  describe(" PUT notifications/update -  Update user's notifications isread status", () => {
+    it("should return status code 200 on updating user's notifications isread status", async () => {
       const res = await chai.request(app)
-        .delete('/api/v1/bookmarks/remove/1')
-        .set('authorization', noToken);
-      res.status.should.equal(400);
+        .put('/api/v1/notifications/update')
+        .set('authorization', token);
+      res.status.should.equal(200);
       res.body.should.be.a('object');
       res.body.should.have.property('data');
       res.body.should.have.property('status');
-      res.body.data.error.token.should.equal('No token provided, please provide one');
+      res.body.data.message.should.equal("User's read status for these notifications updated successfully");
+    });
+
+    it('should return status code 404 if a user has no notifications', async () => {
+      const res = await chai.request(app)
+        .put('/api/v1/notifications/update')
+        .set('authorization', userWithNoNotificationsToken);
+      res.status.should.equal(404);
+      res.body.should.be.a('object');
+      res.body.should.have.property('data');
+      res.body.should.have.property('status');
+      res.body.data.message.should.equal('User have no notifications yet');
     });
 
     it('should return status code 401 if token is invalid', async () => {
       const res = await chai.request(app)
-        .delete('/api/v1/bookmarks/remove/1')
+        .put('/api/v1/notifications/update')
         .set('authorization', invalidToken);
       res.status.should.equal(401);
       res.body.should.be.a('object');
@@ -183,26 +140,62 @@ describe('Errnd Bookmarks Test Suite', () => {
       res.body.data.error.should.equal('Unauthorized, user not authenticated');
     });
 
-    it('should return status code 404 on bookmark not found', async () => {
+    it('should return status code 400 if no token is provided', async () => {
       const res = await chai.request(app)
-        .delete('/api/v1/bookmarks/remove/0')
-        .set('authorization', token);
+        .put('/api/v1/notifications/update')
+        .set('authorization', noToken);
+      res.status.should.equal(400);
+      res.body.should.be.a('object');
+      res.body.should.have.property('data');
+      res.body.should.have.property('status');
+      res.body.data.error.token.should.equal('No token provided, please provide one');
+    });
+  });
+
+  // ==== Delete a user's notification ==== //
+  describe(" DELETE notifications/remove/notificationId -  Delete a user's notification", () => {
+    it('should return status code 404 if a user has no notifications', async () => {
+      const res = await chai.request(app)
+        .delete('/api/v1/notifications/remove/1')
+        .set('authorization', userWithNoNotificationsToken);
       res.status.should.equal(404);
       res.body.should.be.a('object');
       res.body.should.have.property('data');
       res.body.should.have.property('status');
-      res.body.data.message.should.equal('No bookmarked services found');
+      res.body.data.message.should.equal('Notification not found');
     });
 
-    it('should return status code 200 on deleting an existing bookmark', async () => {
+    it('should return status code 401 if token is invalid', async () => {
       const res = await chai.request(app)
-        .delete('/api/v1/bookmarks/remove/1')
+        .delete('/api/v1/notifications/remove/1')
+        .set('authorization', invalidToken);
+      res.status.should.equal(401);
+      res.body.should.be.a('object');
+      res.body.should.have.property('data');
+      res.body.should.have.property('status');
+      res.body.data.error.should.equal('Unauthorized, user not authenticated');
+    });
+
+    it('should return status code 400 if no token is provided', async () => {
+      const res = await chai.request(app)
+        .delete('/api/v1/notifications/remove/1')
+        .set('authorization', noToken);
+      res.status.should.equal(400);
+      res.body.should.be.a('object');
+      res.body.should.have.property('data');
+      res.body.should.have.property('status');
+      res.body.data.error.token.should.equal('No token provided, please provide one');
+    });
+
+    it("should return status code 200 on deleting a user's notification", async () => {
+      const res = await chai.request(app)
+        .delete('/api/v1/notifications/remove/1')
         .set('authorization', token);
       res.status.should.equal(200);
       res.body.should.be.a('object');
       res.body.should.have.property('data');
       res.body.should.have.property('status');
-      res.body.data.message.should.equal('Bookmarked services deleted successfully');
+      res.body.data.message.should.equal('Notification deleted successfully');
     });
   });
 });

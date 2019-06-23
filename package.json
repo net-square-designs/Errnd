@@ -8,7 +8,7 @@
     "test": "cross-env NODE_ENV=test nyc mocha ./test/index --require babel-register --exit --timeout 250000",
     "posttest": "npm run db:undo:migrate:test",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "start:dev": "npm run db:migrate && nodemon index.js --exec babel-node --",
+    "start:dev": "npm run db:migrate && cross-env NODE_ENV=development nodemon index.js --exec babel-node --",
     "db:undo:migrate": "node_modules/.bin/sequelize db:migrate:undo:all",
     "db:undo:migrate:test": "cross-env NODE_ENV=test node_modules/.bin/sequelize db:migrate:undo:all",
     "db:migrate": "node_modules/.bin/sequelize db:migrate",
@@ -53,8 +53,8 @@
     "chai": "^4.2.0",
     "chai-http": "^4.2.0",
     "cors": "^2.8.5",
-    "cross-env": "^5.2.0",
     "coveralls": "^3.0.3",
+    "cross-env": "^5.2.0",
     "dotenv": "^6.2.0",
     "email-validator": "^2.0.4",
     "express": "^4.16.4",
@@ -69,7 +69,9 @@
     "pg-hstore": "^2.3.2",
     "rimraf": "^2.6.2",
     "sequelize": "^5.3.0",
-    "sequelize-cli": "^5.4.0"
+    "sequelize-cli": "^5.5.0",
+    "socket.io": "^2.2.0",
+    "socket.io-client": "^2.2.0"
   },
   "devDependencies": {
     "coveralls": "^3.0.3",
