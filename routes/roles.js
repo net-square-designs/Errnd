@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import express from 'express';
 import { Roles } from '../controllers';
 import { validateUsersProfileExists, validateToken } from '../middlewares';
