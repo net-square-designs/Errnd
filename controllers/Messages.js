@@ -1,8 +1,12 @@
+/* eslint-disable import/no-cycle */
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import { Op } from 'sequelize';
+import ioClient from 'socket.io-client';
+import socket from 'socket.io';
+import { server, environment } from '../index';
 import model from '../models';
-import { StatusResponse } from '../helpers';
+import { StatusResponse, createNotifications } from '../helpers';
 
 dotenv.config();
 const { messages } = model;
@@ -27,19 +31,56 @@ class Messages {
 
     try {
       const decoded = jwt.verify(token, process.env.SECRET_KEY);
-      const sentMessage = await messages.create({
-        message,
-        senderusername: decoded.username,
-        receiverusername: username
-      });
+      if (username === decoded.username) {
+        StatusResponse.forbidden(res, {
+          status: 403,
+          data: {
+            message: 'Forbidden, you cannot send a message to yourself',
+          }
+        });
+      } else {
+        const sentMessage = await messages.create({
+          message,
+          senderusername: decoded.username,
+          receiverusername: username
+        });
 
-      StatusResponse.created(res, {
-        status: 201,
-        data: {
-          message: 'Message sent successfully',
-          sentMessage,
+        // Socket Server
+        const io = socket(server);
+
+        io.on('connection', (Socket) => {
+          Socket.on('message_sent', async (data) => {
+            const typeofnotification = 'message';
+            const notification = await createNotifications(data, typeofnotification);
+            Socket.emit('notification_created', notification);
+          });
+        });
+
+        // Socket Client
+        let socketClient;
+        if (environment === 'development') {
+          socketClient = ioClient('http://localhost:3005');
+        } else {
+          socketClient = ioClient(`${process.env.URL_PROD}:${process.env.PORT || 3005}`);
         }
-      });
+        if (sentMessage !== undefined) {
+          socketClient.emit('message_sent', sentMessage);
+        }
+        /* To be created by the Front-End Engineer to populate notifications
+        icon/page on the client(flutter app(ios/android)) */
+        // socketClient.on('notification_created', (data) => {
+        //   console.log(data, 'This is content of the notifications');
+        // });
+
+        // Server Response
+        StatusResponse.created(res, {
+          status: 201,
+          data: {
+            message: 'Message sent successfully',
+            sentMessage,
+          }
+        });
+      }
     } catch (error) {
       StatusResponse.unauthorized(res, {
         status: 401,
@@ -128,6 +169,53 @@ class Messages {
           data: {
             message: "User's conversation with this person returned successfully",
             retrievedMessages
+          }
+        });
+      } else {
+        StatusResponse.notfound(res, {
+          status: 404,
+          data: {
+            message: 'User have no conversation with this person'
+          }
+        });
+      }
+    } catch (error) {
+      StatusResponse.unauthorized(res, {
+        status: 401,
+        data: {
+          error: 'Unauthorized, user not authenticated'
+        }
+      });
+    }
+  }
+
+  /**
+   * @description - This method takes care of updating the status of user's
+   * conversation with one other person
+   * @param {object} req - request object
+   * @param {object} res - response object
+   * @returns {object}
+   */
+  static async updateConversation(req, res) {
+    const token = req.headers.authorization;
+    const { username } = req.params;
+
+    try {
+      jwt.verify(token, process.env.SECRET_KEY);
+      const updatedConversation = await messages.update({
+        isread: true
+      },
+      {
+        where: {
+          senderusername: username
+        }
+      });
+
+      if (updatedConversation[0] > 0) {
+        StatusResponse.success(res, {
+          status: 200,
+          data: {
+            message: "User's read status for this conversation with this person updated successfully"
           }
         });
       } else {
