@@ -15,6 +15,7 @@ Errnd is a platform where your errands are completed by your communities
   * Users can search for services
   * Users can create, retrieve, search and delete services bookmarked
   * Users can send and receive messages
+  * Users can receive notifications
 
 
 ## Welcome Page [/]
@@ -1528,6 +1529,7 @@ Errnd is a platform where your errands are completed by your communities
                         "message": "Hello, I can develop your web app",
                         "senderusername": "testrunner2",
                         "receiverusername": "testrunner1",
+                        "isread": false,
                         "updatedAt": "2019-06-22T07:56:42.157Z",
                         "createdAt": "2019-06-22T07:56:42.157Z"
                     }
@@ -1611,6 +1613,7 @@ Errnd is a platform where your errands are completed by your communities
                                 "message": "Hello, I can develop your web app",
                                 "senderusername": "testrunner2",
                                 "receiverusername": "testrunner1",
+                                "isread": true,
                                 "createdAt": "2019-06-22T07:56:42.157Z",
                                 "updatedAt": "2019-06-22T07:56:42.157Z"
                             }
@@ -1709,6 +1712,7 @@ Errnd is a platform where your errands are completed by your communities
                                 "message": "Hello, I can develop your web app",
                                 "senderusername": "testrunner2",
                                 "receiverusername": "testrunner1",
+                                "isread": true,
                                 "createdAt": "2019-06-22T07:56:42.157Z",
                                 "updatedAt": "2019-06-22T07:56:42.157Z"
                             }
@@ -1771,7 +1775,7 @@ Errnd is a platform where your errands are completed by your communities
 + Parameters
     + username (text) - testrunner1
 
-### Delete a user's conversation [GET]
+### Delete a user's conversation [DELETE]
 
   * Helps a user delete his conversation with another user
   
@@ -1850,7 +1854,7 @@ Errnd is a platform where your errands are completed by your communities
             
 ## Delete all messages [/messages/remove]
 
-### Delete all user's conversation [GET]
+### Delete all user's conversation [DELETE]
 
   * Helps a user delete all his conversation with every other user
   
@@ -1925,4 +1929,499 @@ Errnd is a platform where your errands are completed by your communities
                 "data": {
                     "message": "No conversation found"
                 }
+            }
+            
+            
+## Update specific messages [/messages/update/{username}]
++ Parameters
+    + username (text) - testrunner1
+
+### Update a user's conversation [PUT]
+
+  * Helps to update read status of a user's conversation
+  
++ Request (application/json)
+
+    + Headers
+
+            Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJ1bm5lckBydW5uZXIuY29tIiwidXNlcklkIjoxLCJyb2xlIjoiY3VzdG9tZXIiLCJ1c2VybmFtZSI6ImludmFsaWR1c2VyIiwiaWF0IjoxNTU5Mzk2Nzg2LCJleHAiOjE1NTk0ODMxODZ9.0PItRXbVtKezfd6FTLTgEcKYOGd1EY3UVYOLWGcgACo
+        
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /messages/update/testrunner1
+
+    + Body        
+    
+    
+            {
+                "status": 200,
+                "data": {
+                    "message": "User's read status for this conversation with this person updated successfully"
+                }
+            }
+            
++ Response 400 (application/json)
+
+    + Headers
+
+            Location: /messages/update/testrunner1
+
+            
+    + Body        
+    
+            {
+                "status": 400,
+                "data": {
+                    "error": {
+                        "token": "No token provided, please provide one"
+                    }
+                }
+            }
+            
++ Response 401 (application/json)
+
+    + Headers
+
+            Location: /messages/testrunner1
+
+            
+    + Body        
+    
+            {
+                status: 401,
+                data: {
+                    error: 'Unauthorized, user not authenticated'
+                }
+            }
+            
++ Response 404 (application/json)
+
+    + Headers
+
+            Location: /messages/update/testrunner1
+
+            
+    + Body        
+    
+            {
+                "status": 404,
+                "data": {
+                    "message": "User have no conversation with this person"
+                }
+            }
+            
+            
+            
+## Notifications [/notifications]
+
+### Retrieve all user's notifications [GET]
+
+  * Helps to retrieve all user's notifications
+  
++ Request (application/json)
+
+    + Headers
+
+            Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJ1bm5lckBydW5uZXIuY29tIiwidXNlcklkIjoxLCJyb2xlIjoiY3VzdG9tZXIiLCJ1c2VybmFtZSI6ImludmFsaWR1c2VyIiwiaWF0IjoxNTU5Mzk2Nzg2LCJleHAiOjE1NTk0ODMxODZ9.0PItRXbVtKezfd6FTLTgEcKYOGd1EY3UVYOLWGcgACo
+        
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /notifications
+
+    + Body        
+    
+    
+            {
+                "status": 200,
+                "data": {
+                    "message": "Notifications returned successfully",
+                    "allNotifications": {
+                        "count": 4,
+                        "rows": [
+                            {
+                                "id": 4,
+                                "senderusername": "testrunner2",
+                                "receiverusername": "testrunner1",
+                                "content": "I want to you to build a rocket for me",
+                                "typeofnotification": "message",
+                                "typeofnotificationid": 54,
+                                "isread": true,
+                                "createdAt": "2019-06-23T13:03:19.804Z",
+                                "updatedAt": "2019-06-23T14:07:59.682Z"
+                            },
+                            {
+                                "id": 3,
+                                "senderusername": "testrunner2",
+                                "receiverusername": "testrunner1",
+                                "content": "I want to you to build a react front end app for me",
+                                "typeofnotification": "message",
+                                "typeofnotificationid": 53,
+                                "isread": true,
+                                "createdAt": "2019-06-23T13:00:52.148Z",
+                                "updatedAt": "2019-06-23T14:07:59.682Z"
+                            },
+                            {
+                                "id": 2,
+                                "senderusername": "testrunner2",
+                                "receiverusername": "testrunner1",
+                                "content": "I want to you to create a web app for me",
+                                "typeofnotification": "message",
+                                "typeofnotificationid": 52,
+                                "isread": true,
+                                "createdAt": "2019-06-23T12:56:51.092Z",
+                                "updatedAt": "2019-06-23T14:07:59.682Z"
+                            },
+                            {
+                                "id": 1,
+                                "senderusername": "testrunner2",
+                                "receiverusername": "testrunner1",
+                                "content": "I want to you to do a business card for me",
+                                "typeofnotification": "message",
+                                "typeofnotificationid": 37,
+                                "isread": true,
+                                "createdAt": "2019-06-23T12:04:09.788Z",
+                                "updatedAt": "2019-06-23T14:07:59.682Z"
+                            }
+                        ]
+                    }
+                }
+            }
+            
++ Response 400 (application/json)
+
+    + Headers
+
+            Location: /notifications
+
+            
+    + Body        
+    
+            {
+                "status": 400,
+                "data": {
+                    "error": {
+                        "token": "No token provided, please provide one"
+                    }
+                }
+            }
+            
++ Response 401 (application/json)
+
+    + Headers
+
+            Location: /notifications
+
+            
+    + Body        
+    
+            {
+                status: 401,
+                data: {
+                    error: 'Unauthorized, user not authenticated'
+                }
+            }
+            
++ Response 404 (application/json)
+
+    + Headers
+
+            Location: /messages
+
+            
+    + Body        
+    
+            {
+                "status": 404,
+                "data": {
+                    "message": "You don't have any notifications yet",
+                    "allNotifications": {}
+                }
+            }
+            
+## Retrieve a specific user's notifications [/notifications/{notificationId}]
++ Parameters
+    + notificationId (number) - 1
+
+### Retrieve one of user's notifications [GET]
+
+  * Helps to retrieve one of user's notifications
+  
++ Request (application/json)
+
+    + Headers
+
+            Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJ1bm5lckBydW5uZXIuY29tIiwidXNlcklkIjoxLCJyb2xlIjoiY3VzdG9tZXIiLCJ1c2VybmFtZSI6ImludmFsaWR1c2VyIiwiaWF0IjoxNTU5Mzk2Nzg2LCJleHAiOjE1NTk0ODMxODZ9.0PItRXbVtKezfd6FTLTgEcKYOGd1EY3UVYOLWGcgACo
+        
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /notifications/1
+
+    + Body        
+    
+    
+            {
+                "status": 200,
+                "data": {
+                    "message": "Notification returned successfully",
+                    "notification": {
+                        "count": 1,
+                        "rows": [
+                            {
+                                "id": 1,
+                                "senderusername": "testrunner2",
+                                "receiverusername": "testrunner1",
+                                "content": "I want to you to do a business card for me",
+                                "typeofnotification": "message",
+                                "typeofnotificationid": 37,
+                                "isread": false,
+                                "createdAt": "2019-06-23T12:04:09.788Z",
+                                "updatedAt": "2019-06-23T12:04:09.788Z"
+                            }
+                        ]
+                    }
+                }
+            }
+            
++ Response 400 (application/json)
+
+    + Headers
+
+            Location: /notifications/1
+
+            
+    + Body        
+    
+            {
+                "status": 400,
+                "data": {
+                    "error": {
+                        "token": "No token provided, please provide one"
+                    }
+                }
+            }
+            
++ Response 401 (application/json)
+
+    + Headers
+
+            Location: /notifications/1
+
+            
+    + Body        
+    
+            {
+                status: 401,
+                data: {
+                    error: 'Unauthorized, user not authenticated'
+                }
+            }
+            
++ Response 404 (application/json)
+
+    + Headers
+
+            Location: /messages/testrunner1
+
+            
+    + Body        
+    
+            {
+                "status": 404,
+                "data": {
+                    "message": "You don't have any notifications yet",
+                    "notification": {}
+                }
+            }
+            
+## Delete notifications [/notifcations/remove/{notificationId}]
++ Parameters
+    + notificationId (number) - 1
+
+### Delete a user's notification [DELETE]
+
+  * Helps a to delete one of a user's notifications
+  
++ Request (application/json)
+
+    + Headers
+
+            Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJ1bm5lckBydW5uZXIuY29tIiwidXNlcklkIjoxLCJyb2xlIjoiY3VzdG9tZXIiLCJ1c2VybmFtZSI6ImludmFsaWR1c2VyIiwiaWF0IjoxNTU5Mzk2Nzg2LCJleHAiOjE1NTk0ODMxODZ9.0PItRXbVtKezfd6FTLTgEcKYOGd1EY3UVYOLWGcgACo
+        
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /notifications/remove/1
+
+    + Body        
+    
+    
+            {
+                "status": 200,
+                "data": {
+                    "message": "Notification deleted successfully"
+                }
+            }
+            
++ Response 400 (application/json)
+
+    + Headers
+
+            Location: /notifications/remove/1
+
+            
+    + Body        
+    
+            {
+                "status": 400,
+                "data": {
+                    "error": {
+                        "token": "No token provided, please provide one"
+                    }
+                }
+            }
+            
++ Response 401 (application/json)
+
+    + Headers
+
+            Location: /notifications/remove/1
+
+            
+    + Body        
+    
+            {
+                status: 401,
+                data: {
+                    error: 'Unauthorized, user not authenticated'
+                }
+            }
+            
++ Response 404 (application/json)
+
+    + Headers
+
+            Location: /notifications/remove/1
+
+            
+    + Body        
+    
+            {
+                "status": 404,
+                "data": {
+                    "message": "Notification not found",
+                    "notification": {}
+                }
+            }
+            
+## Update notifications [/notifications/{update}]
+
+### Update a user's notifications [PUT]
+
+  * Helps to update read status of user's notifications
+  
++ Request (application/json)
+
+    + Headers
+
+            Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJ1bm5lckBydW5uZXIuY29tIiwidXNlcklkIjoxLCJyb2xlIjoiY3VzdG9tZXIiLCJ1c2VybmFtZSI6ImludmFsaWR1c2VyIiwiaWF0IjoxNTU5Mzk2Nzg2LCJleHAiOjE1NTk0ODMxODZ9.0PItRXbVtKezfd6FTLTgEcKYOGd1EY3UVYOLWGcgACo
+        
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /notifications/update
+
+    + Body        
+    
+    
+            {
+                "status": 200,
+                "data": {
+                    "message": "User's read status for these notifications updated successfully"
+                }
+            }
+            
++ Response 400 (application/json)
+
+    + Headers
+
+            Location: /notifications/update
+
+            
+    + Body        
+    
+            {
+                "status": 400,
+                "data": {
+                    "error": {
+                        "token": "No token provided, please provide one"
+                    }
+                }
+            }
+            
++ Response 401 (application/json)
+
+    + Headers
+
+            Location: /notifications/update
+
+            
+    + Body        
+    
+            {
+                status: 401,
+                data: {
+                    error: 'Unauthorized, user not authenticated'
+                }
+            }
+            
++ Response 404 (application/json)
+
+    + Headers
+
+            Location: /messages/update/testrunner1
+
+            
+    + Body        
+    
+            {
+                "status": 404,
+                "data": {
+                    "message": "User have no notifications yet"
+                }
+            }
+            
+            
+## Listen for notifications [/nourl]
+
+### Listen for all type of notifications [GET]
+            
+            
++ Response 200 (application/json)
+
+
+            
+    + Body        
+    
+            {
+                
+                // Dart client
+                IO.Socket socket = IO.io('https://errnd.herokuapp.com:3005');
+                socket.on('notification_created', (data) => print(data));
+                
+                Read more on how to listen for real time socket events here
+                https://github.com/rikulo/socket.io-client-dart
+                    
             }
