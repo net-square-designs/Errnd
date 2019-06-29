@@ -25,7 +25,7 @@ class Services {
   static async create(req, res) {
     const token = req.headers.authorization;
     const {
-      category, subcategory, title, description, price, days, media, packageoptions
+      category, subcategory, title, description, price, days, media, packageoptions, location
     } = req.body;
 
     const { username } = req.params;
@@ -49,6 +49,7 @@ class Services {
           days,
           media,
           packageoptions: JSON.stringify(packageoptions),
+          location,
           userId: decoded.userId
         });
 
@@ -83,7 +84,7 @@ class Services {
   static async update(req, res) {
     const token = req.headers.authorization;
     const {
-      category, subcategory, title, description, price, days, media, packageoptions
+      category, subcategory, title, description, price, days, media, packageoptions, location
     } = req.body;
 
     const { username, serviceId } = req.params;
@@ -114,6 +115,7 @@ class Services {
             price: price || returnedService.dataValues.price,
             days: days || returnedService.dataValues.days,
             media: media || returnedService.dataValues.media,
+            location: location || returnedService.dataValues.location,
             packageoptions: JSON.stringify(packageoptions)
             || returnedService.dataValues.packageoptions
           });
@@ -285,6 +287,7 @@ class Services {
           title: { [Op.iLike]: `%${query}%` },
           description: { [Op.iLike]: `%${query}%` },
           price: Number(query) ? query : null,
+          location: { [Op.iLike]: `%${query}%` },
         }
       },
       include: [

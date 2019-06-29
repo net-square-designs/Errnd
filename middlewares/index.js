@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import validateUserExists from './validateUserExists';
 import validateUserOnLogin from './validateUserOnLogin';
 import validateUserOnSignUp from './validateUserOnSignUp';
@@ -7,6 +8,10 @@ import validateServicesInput from './validateServicesInput';
 import validateToken from './validateToken';
 import validateSearchServicesUrl from './validateSearchServicesUrl';
 import validateMessagesInput from './validateMessagesInput';
+import validateOrdersInput from './validateOrdersInput';
+import validateTaskStatusInput from './validateTaskStatusInput';
+import validateOrderStatusInput from './validateOrderStatusInput';
+import validateServiceExists from './validateServiceExists';
 
 export {
   validateUserExists,
@@ -17,5 +22,9 @@ export {
   validateServicesInput,
   validateToken,
   validateSearchServicesUrl,
-  validateMessagesInput
+  validateMessagesInput,
+  validateOrdersInput,
+  validateTaskStatusInput,
+  validateOrderStatusInput,
+  validateServiceExists
 };

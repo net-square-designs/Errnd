@@ -6,6 +6,7 @@ import Services from './Services';
 import Bookmarks from './Bookmarks';
 import Messages from './Messages';
 import Notifications from './Notifications';
+import Orders from './Orders';
 
 export {
   Auth,
@@ -14,5 +15,6 @@ export {
   Services,
   Bookmarks,
   Messages,
-  Notifications
+  Notifications,
+  Orders
 };
