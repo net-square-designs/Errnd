@@ -6,6 +6,7 @@ import services from './services';
 import bookmarks from './bookmarks';
 import messages from './messages';
 import notifications from './notifications';
+import orders from './orders';
 
 export {
   auth,
@@ -14,5 +15,6 @@ export {
   services,
   bookmarks,
   messages,
-  notifications
+  notifications,
+  orders
 };

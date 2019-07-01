@@ -2,11 +2,8 @@
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import { Op } from 'sequelize';
-import ioClient from 'socket.io-client';
-import socket from 'socket.io';
-import { server, environment } from '../index';
 import model from '../models';
-import { StatusResponse, createNotifications } from '../helpers';
+import { StatusResponse, createNotifications, triggerEvent } from '../helpers';
 
 dotenv.config();
 const { messages } = model;
@@ -44,33 +41,8 @@ class Messages {
           senderusername: decoded.username,
           receiverusername: username
         });
-
-        // Socket Server
-        const io = socket(server);
-
-        io.on('connection', (Socket) => {
-          Socket.on('message_sent', async (data) => {
-            const typeofnotification = 'message';
-            const notification = await createNotifications(data, typeofnotification);
-            Socket.emit('notification_created', notification);
-          });
-        });
-
-        // Socket Client
-        let socketClient;
-        if (environment === 'development') {
-          socketClient = ioClient('http://localhost:3005');
-        } else {
-          socketClient = ioClient(`${process.env.URL_PROD}:${process.env.PORT || 3005}`);
-        }
-        if (sentMessage !== undefined) {
-          socketClient.emit('message_sent', sentMessage);
-        }
-        /* To be created by the Front-End Engineer to populate notifications
-        icon/page on the client(flutter app(ios/android)) */
-        // socketClient.on('notification_created', (data) => {
-        //   console.log(data, 'This is content of the notifications');
-        // });
+        const notification = await createNotifications(sentMessage, 'message');
+        triggerEvent(sentMessage, 'message_sent', notification);
 
         // Server Response
         StatusResponse.created(res, {

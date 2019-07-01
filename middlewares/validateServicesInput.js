@@ -1,10 +1,11 @@
+/* eslint-disable import/no-cycle */
 // Helpers
 import { StatusResponse } from '../helpers';
 
 // This function validates input from a user
 const validateServicesInput = (req, res, next) => {
   const {
-    category, subcategory, title, price, days,
+    category, subcategory, title, price, days, location
   } = req.body;
 
   if (
@@ -13,6 +14,7 @@ const validateServicesInput = (req, res, next) => {
       || !title
       || !price
       || !days
+      || !location
   ) {
     StatusResponse.badRequest(res, {
       status: 400,
@@ -23,6 +25,7 @@ const validateServicesInput = (req, res, next) => {
           title: !title ? 'title must be filled' : '',
           price: !price ? 'price must be filled' : '',
           days: !days ? 'days to deliver must be filled' : '',
+          location: !location ? 'service location must be filled' : '',
         }
       }
     });

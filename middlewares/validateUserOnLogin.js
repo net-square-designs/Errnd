@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 // Packages
 import emailvalidator from 'email-validator';
 // Helpers

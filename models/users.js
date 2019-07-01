@@ -24,6 +24,10 @@ export default (sequelize, DataTypes) => {
       foreignKey: 'senderusername',
       as: 'notifications'
     });
+    Users.hasMany(models.orders, {
+      foreignKey: 'customerusername',
+      as: 'orders'
+    });
   };
   return Users;
 };
