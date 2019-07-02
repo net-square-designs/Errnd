@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import Sequelize from 'sequelize';
 import { StatusResponse } from '../helpers';
 import model from '../models';

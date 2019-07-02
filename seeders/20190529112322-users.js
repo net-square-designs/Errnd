@@ -36,6 +36,14 @@ export default {
     username: 'customer2',
     createdAt: new Date(),
     updatedAt: new Date(),
+  },
+  {
+    role: 'runner',
+    password: hashedPassword,
+    email: 'testrunner3@errnd.com',
+    username: 'testrunner3',
+    createdAt: new Date(),
+    updatedAt: new Date(),
   }], {}),
 
   down: (queryInterface, Sequelize) => queryInterface.bulkDelete('users', null, {})

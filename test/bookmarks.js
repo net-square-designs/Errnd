@@ -52,6 +52,18 @@ describe('Errnd Bookmarks Test Suite', () => {
       res.body.should.have.property('status');
       res.body.data.error.token.should.equal('No token provided, please provide one');
     });
+
+    it('should return status code 404 if service to be bookmarked does not exists', async () => {
+      const res = await chai.request(app)
+        .post('/api/v1/bookmarks/create/0')
+        .set('authorization', token)
+        .send(newBookmark);
+      res.status.should.equal(404);
+      res.body.should.be.a('object');
+      res.body.should.have.property('data');
+      res.body.should.have.property('status');
+      res.body.data.message.should.equal('Service not found');
+    });
   });
 
   // ==== Retrieve all bookmarks by a user ==== //

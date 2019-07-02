@@ -18,6 +18,7 @@
         "error",
         "multi-line"
       ],
+      "import/no-cycle": "off",
       "import/no-unresolved": [
         2,
         {

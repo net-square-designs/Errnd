@@ -180,7 +180,7 @@ class Notifications {
           status: 404,
           data: {
             message: 'Notification not found',
-            bookmark: {}
+            notification: {}
           }
         });
       }

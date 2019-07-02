@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import { StatusResponse } from '../helpers';
 import model from '../models';
 

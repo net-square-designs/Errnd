@@ -16,6 +16,8 @@ Errnd is a platform where your errands are completed by your communities
   * Users can create, retrieve, search and delete services bookmarked
   * Users can send and receive messages
   * Users can receive notifications
+  * Customers can create, retrieve, update the status of orders and delete orders
+  * Runners can retrieve tasks assigned to them and update the status of tasks
 
 
 ## Welcome Page [/]
@@ -435,6 +437,7 @@ Errnd is a platform where your errands are completed by your communities
                      "price": 3500,
                      "days": 3,
                      "media": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+                     "location": "Lagos",
                      "packageoptions": [{
                         "serviceA": "add map to the web app",
                         "quantity": 1,
@@ -478,6 +481,7 @@ Errnd is a platform where your errands are completed by your communities
                         "price": 3500,
                         "days": 3,
                         "media": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+                        "location": "Lagos",
                         "packageoptions": [
                             {
                                 "serviceA": "add map to the web app",
@@ -547,7 +551,8 @@ Errnd is a platform where your errands are completed by your communities
                         "subcategory": "",
                         "title": "",
                         "price": "",
-                        "days": ""
+                        "days": "",
+                        "location": "",
                     }
                 }
             }  
@@ -581,6 +586,7 @@ Errnd is a platform where your errands are completed by your communities
                             "price": 1200,
                             "days": 1,
                             "media": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+                            "location": "Lagos",
                             "packageoptions": [
                                 {
                                     "serviceA": "add music to your androis phone",
@@ -637,6 +643,7 @@ Errnd is a platform where your errands are completed by your communities
                   "price": 3500,
                   "days": 1,
                   "media": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+                  "location": "Abuja",
                   "packageoptions": [{
                         "serviceA": "add map to the mobile app",
                         "quantity": 1,
@@ -679,6 +686,7 @@ Errnd is a platform where your errands are completed by your communities
                         "price": 3500,
                         "days": 1,
                         "media": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+                        "location": "Abuja",
                         "packageoptions": [{
                         "serviceA": "add map to the mobile app",
                         "quantity": 1,
@@ -769,6 +777,7 @@ Errnd is a platform where your errands are completed by your communities
                             "price": 1200,
                             "days": 1,
                             "media": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+                            "location": "Lagos",
                             "packageoptions": [
                                 {
                                     "serviceA": "add music to your androis phone",
@@ -793,6 +802,7 @@ Errnd is a platform where your errands are completed by your communities
                             "price": 3500,
                             "days": 3,
                             "media": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+                            "location": "Port Harcourt",
                             "packageoptions": [
                                 {
                                     "serviceA": "add map to the web app",
@@ -852,6 +862,7 @@ Errnd is a platform where your errands are completed by your communities
                             "price": 3500,
                             "days": 3,
                             "media": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+                            "location": "Port Harcourt",
                             "packageoptions": [
                                 {
                                     "serviceA": "add map to the web app",
@@ -924,6 +935,7 @@ Errnd is a platform where your errands are completed by your communities
                             "price": 3500,
                             "days": 3,
                             "media": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+                            "location": "Port Harcourt",
                             "packageoptions": [
                                 {
                                     "serviceA": "add map to the web app",
@@ -1006,7 +1018,7 @@ Errnd is a platform where your errands are completed by your communities
 
     + Headers
 
-            Location: /bookmarks/create
+            Location: /bookmarks/create/1
 
     + Body        
     
@@ -1030,6 +1042,7 @@ Errnd is a platform where your errands are completed by your communities
                             "price": 3500,
                             "days": 3,
                             "media": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+                            "location": "Lagos",
                             "packageoptions": [
                                 {
                                     "serviceA": "add map to the web app",
@@ -1059,7 +1072,7 @@ Errnd is a platform where your errands are completed by your communities
 
     + Headers
 
-            Location: /bookmarks/create
+            Location: /bookmarks/create/1
 
             
     + Body        
@@ -1077,7 +1090,7 @@ Errnd is a platform where your errands are completed by your communities
 
     + Headers
 
-            Location: /bookmarks/create
+            Location: /bookmarks/create/1
 
             
     + Body        
@@ -1085,9 +1098,25 @@ Errnd is a platform where your errands are completed by your communities
             {
                 status: 401,
                 data: {
-                    error: 'Unauthorized, user not authenticated',
+                    error: 'Unauthorized, user not authenticated'
                 }
-            }   
+            } 
+            
++ Response 404 (application/json)
+
+    + Headers
+
+            Location: /bookmarks/create/0
+
+            
+    + Body        
+    
+            {
+                status: 401,
+                data: {
+                    message: 'Service not found'
+                }
+            } 
 
 ## Retrieve all bookmarked services [/bookmarks]
 
@@ -1133,6 +1162,7 @@ Errnd is a platform where your errands are completed by your communities
                                     "price": 2500,
                                     "days": 2,
                                     "media": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+                                    "location": "Lagos",
                                     "packageoptions": [
                                         {
                                             "serviceA": "add map to the web app",
@@ -1170,6 +1200,7 @@ Errnd is a platform where your errands are completed by your communities
                                     "price": 3500,
                                     "days": 3,
                                     "media": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+                                    "location": "Port Harcourt",
                                     "packageoptions": [
                                         {
                                             "serviceA": "add map to the web app",
@@ -1292,6 +1323,7 @@ Errnd is a platform where your errands are completed by your communities
                                     "price": 2500,
                                     "days": 2,
                                     "media": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+                                    "location": "Lagos",
                                     "packageoptions": [
                                         {
                                             "serviceA": "add map to the web app",
@@ -1329,6 +1361,7 @@ Errnd is a platform where your errands are completed by your communities
                                     "price": 3500,
                                     "days": 3,
                                     "media": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
+                                    "location": "Port Harcourt",
                                     "packageoptions": [
                                         {
                                             "serviceA": "add map to the web app",
@@ -2403,6 +2436,905 @@ Errnd is a platform where your errands are completed by your communities
                 }
             }
             
+## Orders [/orders/customer/{username}]
++ Parameters
+    + username (text) - customer1
+
+### Create orders [POST]
+
+  * Helps a customer to create orders
+  
++ Request (application/json)
+
+    + Body
+    
+               {
+                    "title": "Phone repair",
+                    "description": "I want you to repair my iphone screen",
+                    "category": "Phone",
+                    "quantity": 1,
+                    "budget": 2000,
+                    "duedate": "2019-11-01",
+                    "deliverylocation": "Lagos"
+                }
+
+    + Headers
+
+            Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImN1c3RvbWVyMUBlcnJuZC5jb20iLCJ1c2VySWQiOjEsInJvbGUiOiJjdXN0b21lciIsInVzZXJuYW1lIjoiY3VzdG9tZXIxIiwiaWF0IjoxNTU5Mzk2Nzg2LCJleHAiOjE1NTk0ODMxODZ9.h7Fo0aoysJmRG1wmDYkqL8uSmGJI4Ipg09ZIkrQyx3M
+        
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /orders/customer/customer1
+
+    + Body        
+    
+    
+            {
+                "status": 201,
+                "data": {
+                    "message": "Order created successfully",
+                    "order": {
+                        "id": 1,
+                        "category": "Phone",
+                        "title": "Phone repair",
+                        "description": "I want you to repair my iphone screen",
+                        "budget": 2000,
+                        "duedate": "2019-11-01T00:00:00.000Z",
+                        "deliverylocation": "Lagos",
+                        "quantity": 1,
+                        "customerusername": "customer1",
+                        "runnerusername": "testrunner2",
+                        "updatedAt": "2019-07-02T13:52:38.237Z",
+                        "createdAt": "2019-07-02T13:52:38.237Z",
+                        "status": "new"
+                    }
+                }
+            }
+            
++ Response 400 (application/json)
+
+    + Headers
+
+            Location: /orders/customer/customer1
+
+            
+    + Body        
+    
+            {
+                "status": 400,
+                "data": {
+                    "error": {
+                        "token": "No token provided, please provide one"
+                    }
+                }
+            }
+            
+            {
+                "status": 400,
+                "data": {
+                    "error": {
+                        "title": "title must be filled",
+                        "description": "description must be filled",
+                        "category": "category must be filled",
+                        "quantity": "quantity must be filled",
+                        "budget": "budget must be filled",
+                        "duedate": "due date must be filled",
+                        "deliverylocation": "delivery location must be filled"
+                    }
+                }
+            }
+            {
+                "status": 400,
+                "data": {
+                    "error": {
+                        "quantity": "quantity must be a number",
+                        "budget": "quantity must be a number"
+                    }
+                }
+            }
+            {
+                "status": 400,
+                "data": {
+                    "error": {
+                        "duedate": "due date must be a date and should follow the format YY-MM-DD"
+                    }
+                }
+            }
+            
++ Response 401 (application/json)
+
+    + Headers
+
+            Location: /orders/customer/customer2
+
+            
+    + Body        
+    
+            {
+                status: 401,
+                data: {
+                    error: 'Unauthorized, user not authenticated'
+                }
+            }
+            {
+                status: 401,
+                data: {
+                  error: 'Unauthorized, you cannot create an order on behalf of another user'
+                }
+            }
+            
++ Response 404 (application/json)
+
+    + Headers
+
+            Location: /orders/customer/customer1
+
+            
+    + Body        
+    
+            {
+                status: 404,
+                data: {
+                  message: 'No runners found close to your location or that can handle the service you are requesting, please choose another location or service',
+                }
+            }
+
++ Response 403 (application/json)
+
+    + Headers
+
+            Location: /orders/customer/testrunner1
+
+            
+    + Body        
+    
+            {
+                status: 403,
+                data: {
+                  error: 'Forbidden, only a customer can make an order, please consider switching to customer mode'
+                }
+            }
+
+### Retrieve all customer's orders [GET]
+
+  * Helps to retrieve all customer's orders
+  
++ Request (application/json)
+
+    + Headers
+
+            Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImN1c3RvbWVyMUBlcnJuZC5jb20iLCJ1c2VySWQiOjEsInJvbGUiOiJjdXN0b21lciIsInVzZXJuYW1lIjoiY3VzdG9tZXIxIiwiaWF0IjoxNTU5Mzk2Nzg2LCJleHAiOjE1NTk0ODMxODZ9.h7Fo0aoysJmRG1wmDYkqL8uSmGJI4Ipg09ZIkrQyx3M
+        
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /orders/customer/customer1
+
+    + Body        
+    
+    
+            {
+                "status": 200,
+                "data": {
+                    "message": "All customer's orders returned successfully",
+                    "order": {
+                        "count": 2,
+                        "rows": [
+                            {
+                                "id": 1,
+                                "title": "Software Engineering",
+                                "description": "I want you to build a web app for me",
+                                "category": "Software",
+                                "quantity": 1,
+                                "deliverylocation": "Lagos",
+                                "budget": 5000,
+                                "duedate": "2019-12-09T00:00:00.000Z",
+                                "customerusername": "customer1",
+                                "runnerusername": "testrunner1",
+                                "status": "complete",
+                                "createdAt": "2019-06-28T16:04:37.777Z",
+                                "updatedAt": "2019-06-30T08:26:22.705Z"
+                            },
+                            {
+                                "id": 3,
+                                "title": "Phone repair",
+                                "description": "I want you to repair my iphone screen",
+                                "category": "Phone",
+                                "quantity": 1,
+                                "deliverylocation": "Lagos",
+                                "budget": 2000,
+                                "duedate": "2019-11-01T00:00:00.000Z",
+                                "customerusername": "customer1",
+                                "runnerusername": "testrunner2",
+                                "status": "new",
+                                "createdAt": "2019-07-02T13:52:38.237Z",
+                                "updatedAt": "2019-07-02T13:52:38.237Z"
+                            }
+                        ]
+                    }
+                }
+            }
+            
++ Response 400 (application/json)
+
+    + Headers
+
+            Location: /orders/customer/customer1
+
+            
+    + Body        
+    
+            {
+                "status": 400,
+                "data": {
+                    "error": {
+                        "token": "No token provided, please provide one"
+                    }
+                }
+            }
+            
++ Response 401 (application/json)
+
+    + Headers
+
+            Location: /orders/customer/customer1
+
+            
+    + Body        
+    
+            {
+                status: 401,
+                data: {
+                    error: 'Unauthorized, user not authenticated'
+                }
+            }
+            {
+                status: 401,
+                data: {
+                  error: "Unauthorized, you cannot retrieve another customer's orders"
+                }
+            }
+            
++ Response 404 (application/json)
+
+    + Headers
+
+            Location: /orders/customer/customer1
+
+            
+    + Body        
+    
+            {
+                status: 404,
+                data: {
+                  message: 'Customer have not made an order yet',
+                  tasks: {}
+                }
+            }
+            {
+                status: 404,
+                data: {
+                  message: 'Customer not found'
+                }
+            }
+
++ Response 403 (application/json)
+
+    + Headers
+
+            Location: /orders/customer/customer1
+
+            
+    + Body        
+    
+            {
+                status: 403,
+                data: {
+                  error: 'Forbidden, only a customer can retrieve orders, please consider switching to customer mode'
+                }
+            }
+
+            
+## Retrieve specific runner's task [/orders/runner/{username}/{taskId}]
++ Parameters
+    + username (text) - testrunner1
+    + taskId (number) - 1
+
+### Retrieve one of runner's task [GET]
+
+  * Helps to retrieve one of runner's task
+  
++ Request (application/json)
+
+    + Headers
+
+            Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJ1bm5lckBydW5uZXIuY29tIiwidXNlcklkIjoxLCJyb2xlIjoicnVubmVyIiwidXNlcm5hbWUiOiJ0ZXN0cnVubmVyMSIsImlhdCI6MTU1OTM5Njc4NiwiZXhwIjoxNTU5NDgzMTg2fQ.ziBiluYqpXBqD47xSWb7ggYk6lozrcqgPdCznrIOLu4
+        
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /orders/runner/testrunner1/1
+
+    + Body        
+    
+    
+            {
+                "status": 200,
+                "data": {
+                    "message": "Specific runner's task returned successfully",
+                    "task": {
+                        "count": 1,
+                        "rows": [
+                            {
+                                "id": 1,
+                                "title": "Software Engineering",
+                                "description": "I want you to build a web app for me",
+                                "category": "Software",
+                                "quantity": 1,
+                                "deliverylocation": "Lagos",
+                                "budget": 5000,
+                                "duedate": "2019-12-09T00:00:00.000Z",
+                                "customerusername": "customer1",
+                                "runnerusername": "testrunner1",
+                                "status": "complete",
+                                "createdAt": "2019-06-28T16:04:37.777Z",
+                                "updatedAt": "2019-06-30T08:26:22.705Z"
+                            }
+                        ]
+                    }
+                }
+            }
+            
++ Response 400 (application/json)
+
+    + Headers
+
+            Location: /orders/runner/testrunner1/1
+
+            
+    + Body        
+    
+            {
+                "status": 400,
+                "data": {
+                    "error": {
+                        "token": "No token provided, please provide one"
+                    }
+                }
+            }
+            
++ Response 401 (application/json)
+
+    + Headers
+
+            Location: /orders/runner/testrunner1/1
+
+            
+    + Body        
+    
+            {
+                status: 401,
+                data: {
+                    error: 'Unauthorized, user not authenticated'
+                }
+            }
+            {
+                status: 401,
+                data: {
+                  error: "Unauthorized, you cannot retrieve another runner's task"
+                }
+            }
+            
++ Response 404 (application/json)
+
+    + Headers
+
+            Location: /orders/runner/testrunner1/1
+
+            
+    + Body        
+    
+            {
+                status: 404,
+                data: {
+                  message: 'Runner have no assigned task yet',
+                  tasks: {}
+                }
+            }
+            {
+                status: 404,
+                data: {
+                  message: 'Runner not found'
+                }
+            }
+
++ Response 403 (application/json)
+
+    + Headers
+
+            Location: /orders/runner/testrunner1/1
+
+            
+    + Body        
+    
+            {
+                status: 403,
+                data: {
+                  error: 'Forbidden, only a runner can retrieve tasks, please consider switching to runner mode'
+                }
+            }
+            
+## Retrieve all runner's task [/orders/runner/{username}]
++ Parameters
+    + username (text) - testrunner1
+
+### Retrieve all runner's tasks [GET]
+
+  * Helps to retrieve all runner's tasks
+  
++ Request (application/json)
+
+    + Headers
+
+            Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJ1bm5lckBydW5uZXIuY29tIiwidXNlcklkIjoxLCJyb2xlIjoicnVubmVyIiwidXNlcm5hbWUiOiJ0ZXN0cnVubmVyMSIsImlhdCI6MTU1OTM5Njc4NiwiZXhwIjoxNTU5NDgzMTg2fQ.ziBiluYqpXBqD47xSWb7ggYk6lozrcqgPdCznrIOLu4
+        
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /orders/runner/testrunner1
+
+    + Body        
+    
+    
+            {
+                "status": 200,
+                "data": {
+                    "message": "All runner's tasks returned successfully",
+                    "tasks": {
+                        "count": 1,
+                        "rows": [
+                            {
+                                "id": 1,
+                                "title": "Software Engineering",
+                                "description": "I want you to build a web app for me",
+                                "category": "Software",
+                                "quantity": 1,
+                                "deliverylocation": "Lagos",
+                                "budget": 5000,
+                                "duedate": "2019-12-09T00:00:00.000Z",
+                                "customerusername": "customer1",
+                                "runnerusername": "testrunner1",
+                                "status": "complete",
+                                "createdAt": "2019-06-28T16:04:37.777Z",
+                                "updatedAt": "2019-06-30T08:26:22.705Z"
+                            }
+                        ]
+                    }
+                }
+            }
+            
++ Response 400 (application/json)
+
+    + Headers
+
+            Location: /orders/runner/testrunner1/1
+
+            
+    + Body        
+    
+            {
+                "status": 400,
+                "data": {
+                    "error": {
+                        "token": "No token provided, please provide one"
+                    }
+                }
+            }
+            
++ Response 401 (application/json)
+
+    + Headers
+
+            Location: /orders/runner/testrunner1/1
+
+            
+    + Body        
+    
+            {
+                status: 401,
+                data: {
+                    error: 'Unauthorized, user not authenticated'
+                }
+            }
+            {
+                status: 401,
+                data: {
+                  error: "Unauthorized, you cannot retrieve another runner's tasks"
+                }
+            }
+            
++ Response 404 (application/json)
+
+    + Headers
+
+            Location: /orders/runner/testrunner1/1
+
+            
+    + Body        
+    
+            {
+                status: 404,
+                data: {
+                  message: 'Runner have no assigned task yet',
+                  tasks: {}
+                }
+            }
+            {
+                status: 404,
+                data: {
+                  message: 'Runner not found'
+                }
+            }
+
++ Response 403 (application/json)
+
+    + Headers
+
+            Location: /orders/runner/testrunner1/1
+
+            
+    + Body        
+    
+            {
+                status: 403,
+                data: {
+                  error: 'Forbidden, only a runner can retrieve tasks, please consider switching to runner mode'
+                }
+            }
+            
+            
+## Delete orders [/orders/customer/remove/{orderId}]
++ Parameters
+    + orderId (number) - 1
+
+### Delete a customer's order [DELETE]
+
+  * Helps to delete a customer's order
+  
++ Request (application/json)
+
+    + Headers
+
+            Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImN1c3RvbWVyMUBlcnJuZC5jb20iLCJ1c2VySWQiOjEsInJvbGUiOiJjdXN0b21lciIsInVzZXJuYW1lIjoiY3VzdG9tZXIxIiwiaWF0IjoxNTU5Mzk2Nzg2LCJleHAiOjE1NTk0ODMxODZ9.h7Fo0aoysJmRG1wmDYkqL8uSmGJI4Ipg09ZIkrQyx3M
+        
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /orders/customer/remove/1
+
+    + Body        
+    
+    
+            {
+                status: 200,
+                data: {
+                  message: 'Order deleted successfully'
+                }
+            }
+            
++ Response 400 (application/json)
+
+    + Headers
+
+            Location: /orders/customer/remove/1
+
+            
+    + Body        
+    
+            {
+                "status": 400,
+                "data": {
+                    "error": {
+                        "token": "No token provided, please provide one"
+                    }
+                }
+            }
+            
++ Response 401 (application/json)
+
+    + Headers
+
+            Location: /orders/customer/remove/1
+
+            
+    + Body        
+    
+            {
+                status: 401,
+                data: {
+                    error: 'Unauthorized, user not authenticated'
+                }
+            }
+            
++ Response 404 (application/json)
+
+    + Headers
+
+            Location: /orders/customer/remove/1
+
+            
+    + Body        
+    
+            {
+                status: 404,
+                data: {
+                  message: 'Order not found',
+                  order: {}
+                }
+            }
+
++ Response 403 (application/json)
+
+    + Headers
+
+            Location: /orders/customer/remove/1
+
+            
+    + Body        
+    
+            {
+              status: 403,
+              data: {
+                message: 'Forbidden, only a customer can delete orders'
+              }
+            }       
+            
+            
+## Update Tasks [/orders/runner/{username}/update/{taskId}]
++ Parameters
+    + username (text) - testrunner1
+    + taskId (number) - 1
+
+### Update status of a runner's task [PUT]
+
+  * Helps to update the status of a runner's task
+  
++ Request (application/json)
+
+    + Headers
+
+            Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJ1bm5lckBydW5uZXIuY29tIiwidXNlcklkIjoxLCJyb2xlIjoicnVubmVyIiwidXNlcm5hbWUiOiJ0ZXN0cnVubmVyMSIsImlhdCI6MTU1OTM5Njc4NiwiZXhwIjoxNTU5NDgzMTg2fQ.ziBiluYqpXBqD47xSWb7ggYk6lozrcqgPdCznrIOLu4
+        
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /orders/runner/testrunner1/update/1
+
+    + Body        
+    
+    
+            {
+                status: 200,
+                data: {
+                  message: 'The status of this task updated successfully'
+                }
+            }
+            
++ Response 400 (application/json)
+
+    + Headers
+
+            Location: /orders/runner/testrunner1/update/1
+
+            
+    + Body        
+    
+            {
+                "status": 400,
+                "data": {
+                    "error": {
+                        "token": "No token provided, please provide one"
+                    }
+                }
+            }
+            {
+              status: 400,
+              data: {
+                error: {
+                  status: 'status must be filled'
+                }
+              }
+            }
+            {
+              status: 400,
+              data: {
+                error: 'status must be accept, reject or finish'
+              }
+            }
+            
++ Response 401 (application/json)
+
+    + Headers
+
+            Location: /orders/runner/testrunner1/update/1
+
+            
+    + Body        
+    
+            {
+                status: 401,
+                data: {
+                    error: 'Unauthorized, user not authenticated'
+                }
+            }
+            {
+                status: 401,
+                data: {
+                  error: 'Unauthorized, you cannot update the status of a task on behalf of another runner'
+                }
+            }
+            
++ Response 404 (application/json)
+
+    + Headers
+
+            Location: /orders/runner/testrunner1/update/1
+
+            
+    + Body        
+    
+            {
+                status: 404,
+                data: {
+                  message: 'Runner have no assigned task yet'
+                }
+            }
+            
++ Response 403 (application/json)
+
+    + Headers
+
+            Location: /orders/runner/testrunner1/update/1
+
+            
+    + Body        
+    
+            {
+                status: 403,
+                data: {
+                  error: 'Forbidden, only a runner can update the status of a task, please consider switching to runner mode'
+                }
+            }
+            
+## Update Orders [/orders/customer/{username}/update/{orderId}]
++ Parameters
+    + username (text) - customer1
+    + orderId (number) - 1
+
+### Update status of a customer's order [PUT]
+
+  * Helps to update the status of a customer's order
+  
++ Request (application/json)
+
+    + Headers
+
+            Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImN1c3RvbWVyMUBlcnJuZC5jb20iLCJ1c2VySWQiOjEsInJvbGUiOiJjdXN0b21lciIsInVzZXJuYW1lIjoiY3VzdG9tZXIxIiwiaWF0IjoxNTU5Mzk2Nzg2LCJleHAiOjE1NTk0ODMxODZ9.h7Fo0aoysJmRG1wmDYkqL8uSmGJI4Ipg09ZIkrQyx3M
+        
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /orders/customer/customer1/update/1
+
+    + Body        
+    
+    
+            {
+                status: 200,
+                data: {
+                  message: 'The status of this order updated successfully'
+                }
+            }
+            
++ Response 400 (application/json)
+
+    + Headers
+
+            Location: /orders/customer/customer1/update/1
+
+            
+    + Body        
+    
+            {
+                "status": 400,
+                "data": {
+                    "error": {
+                        "token": "No token provided, please provide one"
+                    }
+                }
+            }
+            {
+              status: 400,
+              data: {
+                error: {
+                  status: 'status must be filled'
+                }
+              }
+            }
+            {
+              status: 400,
+              data: {
+                error: 'status must be complete or incomplete'
+              }
+            }
+            
++ Response 401 (application/json)
+
+    + Headers
+
+            Location: /orders/customer/customer1/update/1
+
+            
+    + Body        
+    
+            {
+                status: 401,
+                data: {
+                    error: 'Unauthorized, user not authenticated'
+                }
+            }
+            {
+                status: 401,
+                data: {
+                  error: 'Unauthorized, you cannot update the status of an order on behalf of another customer'
+                }
+            }
+            
++ Response 404 (application/json)
+
+    + Headers
+
+            Location: /orders/customer/customer1/update/1
+
+            
+    + Body        
+    
+            {
+                status: 404,
+                data: {
+                  message: 'Customer have not made an order yet'
+                }
+            }
+            
++ Response 403 (application/json)
+
+    + Headers
+
+            Location: /orders/customer/customer1/update/1
+            
+    + Body        
+    
+            {
+                status: 403,
+                data: {
+                  error: 'Forbidden, only a customer can update the status of an order, please consider switching to customer mode'
+                }
+            }
             
 ## Listen for notifications [/nourl]
 
@@ -2423,5 +3355,13 @@ Errnd is a platform where your errands are completed by your communities
                 
                 Read more on how to listen for real time socket events here
                 https://github.com/rikulo/socket.io-client-dart
+                
+                // When to listen for notifications
+                * When a message is sent, the receiver receives a notification
+                * When an order is created, the assigned runner receives a notifcation
+                * When the status of a task is updated by a runner, the customer that created the
+                order receives notifcation
+                * When the status of an order is updated by a customer, the runner
+                assigned receives a notifcation
                     
             }

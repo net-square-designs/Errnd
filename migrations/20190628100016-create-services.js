@@ -28,6 +28,9 @@ export function up(queryInterface, Sequelize) {
     media: {
       type: Sequelize.STRING
     },
+    location: {
+      type: Sequelize.STRING
+    },
     packageoptions: {
       type: Sequelize.STRING
     },

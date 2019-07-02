@@ -7,6 +7,7 @@ export default (sequelize, DataTypes) => {
     price: DataTypes.INTEGER,
     days: DataTypes.INTEGER,
     media: DataTypes.STRING,
+    location: DataTypes.STRING,
     packageoptions: DataTypes.STRING
   }, {});
   Services.associate = (models) => {
